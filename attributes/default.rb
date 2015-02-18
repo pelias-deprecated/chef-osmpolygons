@@ -19,7 +19,6 @@ default[:osmpolygons][:user][:ssh_keygen]   = false
 
 # extracts
 default[:osmpolygons][:extracts][:array]     = %w(
-  /path/to/file.blah
-  /path/to/file2.blah
-  http://www.sco.com/unix.junk.pbf
+  https://s3.amazonaws.com/metro-extracts.mapzen.com/naples_italy.osm.pbf
+  https://s3.amazonaws.com/metro-extracts.mapzen.com/philadelphia_pennsylvania.osm.pbf
 )
