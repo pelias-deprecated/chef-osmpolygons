@@ -21,6 +21,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     cwd     "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
     user    node[:osmpolygons][:user][:id]
     command "node app.js >#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.log 2>#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.err"
+    timeout node[:osmpolygons][:extracts][:timeout]
     environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json")
   end
 end

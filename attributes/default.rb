@@ -22,3 +22,4 @@ default[:osmpolygons][:extracts][:array]     = %w(
   https://s3.amazonaws.com/metro-extracts.mapzen.com/naples_italy.osm.pbf
   https://s3.amazonaws.com/metro-extracts.mapzen.com/philadelphia_pennsylvania.osm.pbf
 )
+default[:osmpolygons][:extracts][:timeout]   = 7_200 # 2 hours
