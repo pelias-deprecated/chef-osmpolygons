@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.0.3
+-----
+* drive extract creation off download of new data rather than template existence
+
 0.0.2
 -----
 * always download data rather than let osmium retrieve it (which can prove to be problematic)

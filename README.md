@@ -18,8 +18,6 @@ Usage
 -----
     include_recipe 'osmpolygons::default'
 
-After completing a run, you can rebuild data for a given extract by removing its config file.
-
 Supported Platforms
 -------------------
 Tested and supported on the following platforms:
