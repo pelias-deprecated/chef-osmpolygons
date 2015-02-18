@@ -8,6 +8,7 @@ Extracts admin boundaries from OSM data.
 
 What hardware do I need?
 ------------------------
+TODO
 
 Contributing
 ------------
@@ -16,6 +17,8 @@ Please fork, update, write specs for your changes and submit a pull.
 Usage
 -----
     include_recipe 'osmpolygons::default'
+
+After completing a run, you can rebuild data for a given extract by removing its config file.
 
 Supported Platforms
 -------------------
