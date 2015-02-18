@@ -9,7 +9,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
   template "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json" do
     user      node[:osmpolygons][:user][:id]
     source    'config.json.erb'
-    notifies  :run, "execute[create extracts from config_#{cfg}.json]", :delayed
+    notifies  :run, "execute[create extracts from config_#{cfg}.json]", :immediately
     variables(
       outputdir: node[:osmpolygons][:setup][:outputdir],
       inputfile: extract
