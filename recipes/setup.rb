@@ -23,6 +23,12 @@ directory "#{node[:osmpolygons][:setup][:basedir]}/logs" do
   mode      0755
 end
 
+directory node[:osmpolygons][:setup][:datadir] do
+  user      node[:osmpolygons][:user][:id]
+  mode      0755
+  recursive true
+end
+
 directory node[:osmpolygons][:setup][:outputdir] do
   user      node[:osmpolygons][:user][:id]
   mode      0755
