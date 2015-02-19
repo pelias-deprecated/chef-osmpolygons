@@ -24,3 +24,4 @@ default[:osmpolygons][:extracts][:array]     = %w(
   http://download.geofabrik.de/north-america/us/hawaii-latest.osm.pbf
 )
 default[:osmpolygons][:extracts][:timeout]   = 7_200 # 2 hours
+default[:osmpolygons][:extracts][:force]     = false 

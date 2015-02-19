@@ -30,4 +30,15 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     subscribes  :run, "execute[download #{extract}]", :immediately
     environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json")
   end
+
+  # force extract creation
+  execute "force create extracts from config_#{cfg}.json" do
+    cwd         "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
+    user        node[:osmpolygons][:user][:id]
+    command     "node app.js >#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.log 2>#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.err"
+    timeout     node[:osmpolygons][:extracts][:timeout]
+    subscribes  :run, "execute[download #{extract}]", :immediately
+    only_if    { node[:osmpolygons][:extracts][:force] == true }
+    environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json")
+  end
 end

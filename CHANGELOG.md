@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.0.4
+-----
+* allow forcing of extracts with attribute
+
 0.0.3
 -----
 * drive extract creation off download of new data rather than template existence
