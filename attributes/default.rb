@@ -13,6 +13,7 @@ default[:osmpolygons][:setup][:revision]    = 'master'
 
 # user
 default[:osmpolygons][:user][:id]           = 'poly'
+default[:osmpolygons][:user][:uid]          = 2002
 default[:osmpolygons][:user][:shell]        = '/bin/bash'
 default[:osmpolygons][:user][:manage_home]  = false
 default[:osmpolygons][:user][:create_group] = true
