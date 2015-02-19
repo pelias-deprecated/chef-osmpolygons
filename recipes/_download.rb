@@ -25,5 +25,6 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     action  :nothing
     command "wget --quiet -O #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{extract}"
     user    node[:osmpolygons][:user][:id]
+    timeout 14_400
   end
 end
