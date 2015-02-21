@@ -19,6 +19,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     source    "#{extract}.md5"
     mode      0644
     notifies  :run, "execute[download #{extract}]", :immediately
+    not_if    { node[:osmpolygons][:extracts][:force] == true }
   end
 
   execute "download #{extract}" do
