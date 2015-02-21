@@ -18,7 +18,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     backup    false
     source    "#{extract}.md5"
     mode      0644
-    notifies  :run, "execute[download #{extract}]",       :immediately
+    notifies  :run, "execute[download #{extract}]", :immediately
   end
 
   execute "download #{extract}" do
