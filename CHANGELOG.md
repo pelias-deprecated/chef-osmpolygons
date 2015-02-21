@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.0.5
+-----
+* don't try to download when force == true
+
 0.0.4
 -----
 * allow forcing of extracts with attribute
