@@ -5,11 +5,14 @@
 
 # setup
 default[:osmpolygons][:setup][:basedir]     = '/mnt/poly'
-default[:osmpolygons][:setup][:outputdir]   = "#{node[:osmpolygons][:setup][:basedir]}/output"
-default[:osmpolygons][:setup][:datadir]     = "#{node[:osmpolygons][:setup][:basedir]}/data"
+default[:osmpolygons][:setup][:logdir]      = "#{node[:osmpolygons][:setup][:basedir]}/logs"
 default[:osmpolygons][:setup][:cfgdir]      = "#{node[:osmpolygons][:setup][:basedir]}/etc"
-default[:osmpolygons][:setup][:repo]        = 'https://github.com/pelias/openstreetmap-polygons.git'
-default[:osmpolygons][:setup][:revision]    = 'master'
+default[:osmpolygons][:setup][:datadir]     = "#{node[:osmpolygons][:setup][:basedir]}/data"
+default[:osmpolygons][:setup][:outputdir]   = "#{node[:osmpolygons][:setup][:basedir]}/output"
+
+# deploy
+default[:osmpolygons][:deploy][:repo]       = 'https://github.com/pelias/openstreetmap-polygons.git'
+default[:osmpolygons][:deploy][:revision]   = 'master'
 
 # user
 default[:osmpolygons][:user][:id]           = 'poly'

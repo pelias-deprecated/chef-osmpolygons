@@ -17,9 +17,10 @@ directory node[:osmpolygons][:setup][:basedir] do
   recursive true
 end
 
-directory "#{node[:osmpolygons][:setup][:basedir]}/logs" do
+directory node[:osmpolygons][:setup][:logdir] do
   user      node[:osmpolygons][:user][:id]
   mode      0755
+  recursive true
 end
 
 directory node[:osmpolygons][:setup][:datadir] do

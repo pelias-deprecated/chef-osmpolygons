@@ -3,12 +3,10 @@
 # Recipe:: deploy
 #
 
-include_recipe 'osmpolygons::setup'
-
 git "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons" do
   action      :sync
-  repository  node[:osmpolygons][:setup][:repo]
-  revision    node[:osmpolygons][:setup][:revision]
+  repository  node[:osmpolygons][:deploy][:repo]
+  revision    node[:osmpolygons][:deploy][:revision]
   user        node[:osmpolygons][:user][:id]
   notifies    :run, 'execute[npm install]', :immediately
 end

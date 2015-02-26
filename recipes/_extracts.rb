@@ -25,7 +25,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
     action      :nothing
     cwd         "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
     user        node[:osmpolygons][:user][:id]
-    command     "node app.js >#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.log 2>#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.err"
+    command     "node app.js >#{node[:osmpolygons][:setup][:logdir]}/#{cfg}.log 2>#{node[:osmpolygons][:setup][:logdir]}/#{cfg}.err"
     timeout     node[:osmpolygons][:extracts][:timeout]
     subscribes  :run, "execute[download #{extract}]", :immediately
     environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json")
@@ -35,7 +35,7 @@ node[:osmpolygons][:extracts][:array].each do |extract|
   execute "force create extracts from config_#{cfg}.json" do
     cwd     "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
     user    node[:osmpolygons][:user][:id]
-    command "node app.js >#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.log 2>#{node[:osmpolygons][:setup][:basedir]}/logs/#{cfg}.err"
+    command "node app.js >#{node[:osmpolygons][:setup][:logdir]}/#{cfg}.log 2>#{node[:osmpolygons][:setup][:logdir]}/#{cfg}.err"
     timeout node[:osmpolygons][:extracts][:timeout]
     only_if { node[:osmpolygons][:extracts][:force] == true }
     environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config_#{cfg}.json")
