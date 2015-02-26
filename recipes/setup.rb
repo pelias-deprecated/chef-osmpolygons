@@ -3,10 +3,9 @@
 # Recipe:: setup
 #
 
-# packages for 12.04 and 14.04
-#
 %w(
   git
+  gdal-bin
   build-essential
 ).each do |p|
   package p
