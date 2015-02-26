@@ -1,6 +1,11 @@
 osmpolygons changelog
 =====================
 
+0.1.0
+-----
+* lint
+* gdal-bin, prep for building previews
+
 0.0.5
 -----
 * don't try to download when force == true
