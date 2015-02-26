@@ -20,9 +20,9 @@ default[:osmpolygons][:user][:create_group] = true
 default[:osmpolygons][:user][:ssh_keygen]   = false
 
 # extracts
-default[:osmpolygons][:extracts][:array]     = %w(
+default[:osmpolygons][:extracts][:force]    = false 
+default[:osmpolygons][:extracts][:timeout]  = 7_200 # 2 hours
+default[:osmpolygons][:extracts][:array]    = %w(
   http://download.geofabrik.de/north-america/us/rhode-island-latest.osm.pbf
   http://download.geofabrik.de/north-america/us/hawaii-latest.osm.pbf
 )
-default[:osmpolygons][:extracts][:timeout]   = 7_200 # 2 hours
-default[:osmpolygons][:extracts][:force]     = false 
