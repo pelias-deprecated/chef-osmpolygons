@@ -36,17 +36,6 @@ Cookbook Dependencies
 ---------------------
 apt, user, nodejs
 
-Vagrant Environment
-===================
-
-Installation
-------------
-    vagrant plugin install vagrant-berkshelf 
-    bundle install
-    berks install
-    vagrant up
-    vagrant ssh
-
 License and Authors
 -------------------
 License: GPL
