@@ -25,7 +25,11 @@ execute 'create extracts' do
   action      run_action
   cwd         "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
   user        node[:osmpolygons][:user][:id]
-  command     "node app.js >#{node[:osmpolygons][:setup][:logdir]}/extract.log 2>#{node[:osmpolygons][:setup][:logdir]}/extract.err"
+  command     <<-EOH
+    node app.js \
+      >#{node[:osmpolygons][:setup][:logdir]}/extract.log \
+      2>#{node[:osmpolygons][:setup][:logdir]}/extract.err"
+  EOH
   timeout     node[:osmpolygons][:extracts][:timeout]
   subscribes  :run, 'execute[download planet]', :immediately
   environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config.json")
