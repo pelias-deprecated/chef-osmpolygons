@@ -14,32 +14,16 @@ include_recipe 'nodejs::default'
   package p
 end
 
-directory node[:osmpolygons][:setup][:basedir] do
-  user      node[:osmpolygons][:user][:id]
-  mode      0755
-  recursive true
-end
-
-directory node[:osmpolygons][:setup][:logdir] do
-  user      node[:osmpolygons][:user][:id]
-  mode      0755
-  recursive true
-end
-
-directory node[:osmpolygons][:setup][:datadir] do
-  user      node[:osmpolygons][:user][:id]
-  mode      0755
-  recursive true
-end
-
-directory node[:osmpolygons][:setup][:outputdir] do
-  user      node[:osmpolygons][:user][:id]
-  mode      0755
-  recursive true
-end
-
-directory node[:osmpolygons][:setup][:cfgdir] do
-  user      node[:osmpolygons][:user][:id]
-  mode      0755
-  recursive true
+[
+  node[:osmpolygons][:setup][:basedir],
+  node[:osmpolygons][:setup][:logdir],
+  node[:osmpolygons][:setup][:datadir],
+  node[:osmpolygons][:setup][:datadir],
+  node[:osmpolygons][:setup][:outputdir]
+].each do |dir|
+  directory dir do
+    user      node[:osmpolygons][:user][:id]
+    mode      0755
+    recursive true
+  end
 end
