@@ -16,7 +16,7 @@ default[:osmpolygons][:setup][:datadir]     = "#{node[:osmpolygons][:setup][:bas
 default[:osmpolygons][:setup][:outputdir]   = "#{node[:osmpolygons][:setup][:basedir]}/output"
 
 # deploy
-default[:osmpolygons][:deploy][:repo]       = 'https://github.com/pelias/openstreetmap-polygons.git'
+default[:osmpolygons][:deploy][:repo]       = 'https://github.com/pelias/fences-builder.git'
 default[:osmpolygons][:deploy][:revision]   = 'master'
 
 # user
