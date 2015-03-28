@@ -16,7 +16,6 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
   source    "#{node[:osmpolygons][:planet][:url]}.md5"
   mode      0644
   notifies  :run, 'execute[download planet]', :immediately
-  not_if    { node[:osmpolygons][:extracts][:force] == true }
 end
 
 # use wget because remote_file is incredibly awful for files this large
