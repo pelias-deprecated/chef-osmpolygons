@@ -17,7 +17,7 @@ end
 [
   node[:osmpolygons][:setup][:basedir],
   node[:osmpolygons][:setup][:logdir],
-  node[:osmpolygons][:setup][:datadir],
+  node[:osmpolygons][:setup][:cfgdir],
   node[:osmpolygons][:setup][:datadir],
   node[:osmpolygons][:setup][:outputdir]
 ].each do |dir|
