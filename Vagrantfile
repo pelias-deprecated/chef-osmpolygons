@@ -72,11 +72,6 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      "nodejs" => {
-        "install_method" => "binary",
-        "version" => "0.10.36",
-        "checksum_linux_x64" => "2bc13477684a9fe534bdc9d8f4a8caf6257a11953b57c42cad9b919ee259a0d5"
-      }
     }
 
     chef.run_list = [
