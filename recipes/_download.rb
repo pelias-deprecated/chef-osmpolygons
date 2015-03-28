@@ -19,6 +19,7 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
   not_if    { node[:osmpolygons][:extracts][:force] == true }
 end
 
+# use wget because remote_file is incredibly awful for files this large
 execute 'download planet' do
   action  :nothing
   command "wget --quiet -O #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
