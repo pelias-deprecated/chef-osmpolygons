@@ -9,8 +9,8 @@ include_recipe 'osmpolygons::_download'
 filename = node[:osmpolygons][:planet][:url].split('/').last
 
 template "#{node[:osmpolygons][:setup][:cfgdir]}/config.json" do
-  user        node[:osmpolygons][:user][:id]
-  source      'config.json.erb'
+  user   node[:osmpolygons][:user][:id]
+  source 'config.json.erb'
   variables(
     outputdir: node[:osmpolygons][:setup][:outputdir],
     inputfile: "#{node[:osmpolygons][:setup][:datadir]}/#{filename}"
@@ -25,12 +25,12 @@ execute 'create extracts' do
   action      run_action
   cwd         "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
   user        node[:osmpolygons][:user][:id]
-  command     <<-EOH
+  timeout     node[:osmpolygons][:extracts][:timeout]
+  subscribes  :run, 'execute[download planet]', :immediately
+  command <<-EOH
     node app.js \
       >#{node[:osmpolygons][:setup][:logdir]}/extract.log \
       2>#{node[:osmpolygons][:setup][:logdir]}/extract.err"
   EOH
-  timeout     node[:osmpolygons][:extracts][:timeout]
-  subscribes  :run, 'execute[download planet]', :immediately
   environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config.json")
 end
