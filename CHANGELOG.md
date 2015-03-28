@@ -4,6 +4,9 @@ osmpolygons changelog
 0.2.0
 -----
 * cut admin boundaries from the planet rather than from extracts, which proved problematic
+* remove vagrant, can't use it when operating on the planet
+* update repo to directly reference Fences project
+* still need to try and download if force == true, because it might be our first run and we as yet have no data
 
 0.1.0
 -----
