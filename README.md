@@ -4,7 +4,7 @@ osmpolygons Chef Cookbook
 
 What does it do?
 ----------------
-Extracts admin boundaries from OSM data.
+Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data.
 
 What hardware do I need?
 ------------------------
@@ -32,9 +32,9 @@ Attributes
 ----------
 * see [attributes/default.rb](https://github.com/mapzen/chef-osmpolygons/blob/master/attributes/default.rb)
 
-Dependencies
------------
-apt, user
+Cookbook Dependencies
+---------------------
+apt, user, nodejs
 
 Vagrant Environment
 ===================
