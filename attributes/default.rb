@@ -28,7 +28,7 @@ default[:osmpolygons][:user][:create_group] = true
 default[:osmpolygons][:user][:ssh_keygen]   = false
 
 # extracts
-default[:osmpolygons][:extracts][:force]    = false 
+default[:osmpolygons][:extracts][:force]    = false
 default[:osmpolygons][:extracts][:timeout]  = 43_200 # 12 hours
 
 # planet
