@@ -4,7 +4,6 @@
 #
 
 %w(
-  apt::default
   osmpolygons::_user
   osmpolygons::_setup
   osmpolygons::_deploy

@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.2.0
+-----
+* cut admin boundaries from the planet rather than from extracts, which proved problematic
+
 0.1.0
 -----
 * lint

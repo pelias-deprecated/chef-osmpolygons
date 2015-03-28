@@ -7,25 +7,21 @@
 #   temp file goes somewhere with enough space
 ENV['TMP'] = node[:osmpolygons][:setup][:datadir]
 
-node[:osmpolygons][:extracts][:array].each do |extract|
-  # fail if someone tries to pull something other than
-  #   a pbf data file
-  filename = extract.split('/').last
-  fail if filename !~ /\.pbf$/
+filename = node[:osmpolygons][:planet][:url].split('/').last
+fail if filename !~ /\.pbf$/
 
-  remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
-    action    :create
-    backup    false
-    source    "#{extract}.md5"
-    mode      0644
-    notifies  :run, "execute[download #{extract}]", :immediately
-    not_if    { node[:osmpolygons][:extracts][:force] == true }
-  end
+remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
+  action    :create
+  backup    false
+  source    "#{node[:osmpolygons][:planet][:url]}.md5"
+  mode      0644
+  notifies  :run, 'execute[download planet]', :immediately
+  not_if    { node[:osmpolygons][:extracts][:force] == true }
+end
 
-  execute "download #{extract}" do
-    action  :nothing
-    command "wget --quiet -O #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{extract}"
-    user    node[:osmpolygons][:user][:id]
-    timeout 14_400
-  end
+execute 'download planet' do
+  action  :nothing
+  command "wget --quiet -O #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
+  user    node[:osmpolygons][:user][:id]
+  timeout 14_400
 end

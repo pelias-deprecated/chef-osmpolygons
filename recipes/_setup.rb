@@ -3,6 +3,9 @@
 # Recipe:: setup
 #
 
+include_recipe 'apt::default'
+include_recipe 'nodejs::default'
+
 %w(
   git
   gdal-bin

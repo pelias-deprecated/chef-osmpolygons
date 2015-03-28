@@ -22,7 +22,6 @@ Supported Platforms
 -------------------
 Tested and supported on the following platforms:
 
-* Ubuntu 12.04LTS
 * Ubuntu 14.04LTS
 
 Requirements
@@ -47,13 +46,6 @@ Installation
     berks install
     vagrant up
     vagrant ssh
-
-#### I don't like Vagrant
-* well then sir, provision an Ubuntu14.04 LTS system with the provider of your choice, and then bootstrap with chef-solo:
-    `knife solo bootstrap root@${host} -r 'recipe[osmpolygons]'`
-* and re-cook with the following:
-    `knife solo cook root@${host} -r 'recipe[osmpolygons]'`
-* alternatively, you can add the osmpolygons cookbook to your chef server and wrap it as you see fit
 
 License and Authors
 -------------------
