@@ -23,7 +23,7 @@ default[:osmpolygons][:user][:create_group] = true
 default[:osmpolygons][:user][:ssh_keygen]   = false
 
 # extracts
-default[:osmpolygons][:extracts][:force]    = false 
+default[:osmpolygons][:extracts][:force]    = false
 default[:osmpolygons][:extracts][:timeout]  = 7_200 # 2 hours
 default[:osmpolygons][:extracts][:array]    = %w(
   http://download.geofabrik.de/north-america/us/rhode-island-latest.osm.pbf
