@@ -8,7 +8,8 @@ Downloads the planet pbf, installs dependencies and extracts admin boundaries fr
 
 What hardware do I need?
 ------------------------
-The equivalent of an AWS r3.xlarge or better: quad-core, 30GB RAM
+The equivalent of an AWS r3.xlarge or better: quad-core, 30GB RAM.
+Data storage of ~100GB and support for ~500iops.
 
 How Long Does it Take
 ---------------------
