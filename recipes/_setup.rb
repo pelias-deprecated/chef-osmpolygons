@@ -19,7 +19,8 @@ end
   node[:osmpolygons][:setup][:logdir],
   node[:osmpolygons][:setup][:cfgdir],
   node[:osmpolygons][:setup][:datadir],
-  node[:osmpolygons][:setup][:outputdir]
+  node[:osmpolygons][:setup][:outputdir][:planet],
+  node[:osmpolygons][:setup][:outputdir][:extracts]
 ].each do |dir|
   directory dir do
     user      node[:osmpolygons][:user][:id]

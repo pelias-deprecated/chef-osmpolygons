@@ -6,11 +6,11 @@
 # generate configs
 filename = node[:osmpolygons][:planet][:url].split('/').last
 
-template "#{node[:osmpolygons][:setup][:cfgdir]}/config.json" do
+template "#{node[:osmpolygons][:setup][:cfgdir]}/planet_config.json" do
   user   node[:osmpolygons][:user][:id]
-  source 'config.json.erb'
+  source 'planet_config.json.erb'
   variables(
-    outputdir: node[:osmpolygons][:setup][:outputdir],
+    outputdir: node[:osmpolygons][:setup][:outputdir][:planet],
     inputfile: "#{node[:osmpolygons][:setup][:datadir]}/#{filename}"
   )
 end
@@ -29,8 +29,9 @@ execute 'create extracts' do
   subscribes  :run, 'execute[download planet]', :immediately
   command <<-EOH
     node app.js \
+      --max-old-space-size=10000 \
       >#{node[:osmpolygons][:setup][:logdir]}/extract.log \
       2>#{node[:osmpolygons][:setup][:logdir]}/extract.err
   EOH
-  environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config.json")
+  environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/planet_config.json")
 end
