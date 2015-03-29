@@ -42,11 +42,8 @@ default[:osmpolygons][:extracts][:planet][:kb_heap]      = '28672'
 #   Alternatively, specify the hash directly in the attribute.
 #   Defaults to empty.
 #
-require 'json'
-
-default[:osmpolygons][:extracts][:hash_by_file]          = '/etc/extracts_hash'
-default[:osmpolygons][:extracts][:hash]                  =
-  File.exist?(node[:osmpolygons][:extracts][:hash_by_file]) ? JSON.parse(File.read(node[:osmpolygons][:extracts][:hash_by_file])) : {}
+default[:osmpolygons][:extracts][:hash]                  = {}
+default[:osmpolygons][:extracts][:hash_from_file]        = '/etc/extracts.json'
 default[:osmpolygons][:extracts][:slices][:timeout]      = 7_200  # 2 hours
 default[:osmpolygons][:extracts][:slices][:kb_heap]      = '8192'
 

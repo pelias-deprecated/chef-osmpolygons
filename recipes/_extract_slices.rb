@@ -3,6 +3,14 @@
 # Recipe:: _extract_slices
 #
 
+require 'json'
+
+# if the json override exists, read it and use that data
+if File.exist?(node[:osmpolygons][:extracts][:hash_from_file])
+  data = JSON.parse(File.read(node[:osmpolygons][:extracts][:hash_from_file]))
+  node.set[:osmpolygons][:extracts][:hash] = data
+end
+
 # generate configs for each extract in our hash
 node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extracts][:hash].map do |name, bbox|
@@ -13,7 +21,7 @@ node[:osmpolygons][:extracts][:hash].map do |name, bbox|
       inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
       outputdir: "#{node[:osmpolygons][:setup][:outputdir][:extracts]}/#{name}",
       name: name,
-      box: bbox
+      bbox: bbox
     )
   end
 
