@@ -30,7 +30,7 @@ execute 'create extracts' do
   command <<-EOH
     node app.js \
       >#{node[:osmpolygons][:setup][:logdir]}/extract.log \
-      2>#{node[:osmpolygons][:setup][:logdir]}/extract.err"
+      2>#{node[:osmpolygons][:setup][:logdir]}/extract.err
   EOH
   environment('PELIAS_CONFIG' => "#{node[:osmpolygons][:setup][:cfgdir]}/config.json")
 end
