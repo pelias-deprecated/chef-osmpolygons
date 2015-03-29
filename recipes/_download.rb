@@ -45,4 +45,3 @@ ruby_block 'verify md5' do
     end
   end
 end
-
