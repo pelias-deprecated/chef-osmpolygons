@@ -26,7 +26,7 @@ node[:osmpolygons][:extracts][:slices].map do |name, bbox|
   # node[:osmpolygons][:extracts][:force][:slices]
   execute "create extracts for #{name}" do
     action      slice_action
-    cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer"
+    cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer/current"
     user        node[:osmpolygons][:user][:id]
     timeout     node[:osmpolygons][:extracts][:slices][:timeout]
     subscribes  :run, 'execute[create planet extracts]', :immediately

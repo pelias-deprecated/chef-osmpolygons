@@ -22,7 +22,7 @@ include_recipe 'osmpolygons::_download'
 node[:osmpolygons][:extracts][:force][:planet] ? planet_action = :run : planet_action = :nothing
 execute 'create planet extracts' do
   action      planet_action
-  cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-builder"
+  cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-builder/current"
   user        node[:osmpolygons][:user][:id]
   timeout     node[:osmpolygons][:extracts][:planet][:timeout]
   command <<-EOH
