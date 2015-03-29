@@ -34,10 +34,7 @@ default[:osmpolygons][:user][:ssh_keygen]                = false
 default[:osmpolygons][:extracts][:force][:planet]        = false
 default[:osmpolygons][:extracts][:force][:slices]        = false
 default[:osmpolygons][:extracts][:timeout]               = 43_200 # 12 hours
-default[:osmpolygons][:extracts][:hash]                  = {
-  'usa' => ['b', 'b', 'o', 'x'],
-  'bre' => ['xy', '123', '333', 'y']
-}
+default[:osmpolygons][:extracts][:hash]                  = {}
 
 # planet
 #   NOTE: must support an accompanying .md5
