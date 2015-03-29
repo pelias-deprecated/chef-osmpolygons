@@ -26,7 +26,7 @@ execute 'download planet' do
   timeout 14_400
   command <<-EOH
     wget --quiet -O \
-      #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
+      #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}
   EOH
 end
 
