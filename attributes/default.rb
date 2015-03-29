@@ -35,7 +35,7 @@ default[:osmpolygons][:extracts][:force][:planet]        = false
 default[:osmpolygons][:extracts][:force][:slices]        = false
 default[:osmpolygons][:extracts][:planet][:timeout]      = 43_200 # 12 hours
 default[:osmpolygons][:extracts][:slices][:timeout]      = 7_200  # 2 hours
-default[:osmpolygons][:extracts][:hash]                  = {}
+default[:osmpolygons][:extracts][:slices]                = {}
 
 # planet
 #   NOTE: must support an accompanying .md5

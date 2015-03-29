@@ -5,7 +5,7 @@
 
 # generate configs for each extract in our hash
 node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
-node[:osmpolygons][:extracts][:hash].map do |name, bbox|
+node[:osmpolygons][:extracts][:slices].map do |name, bbox|
   template "#{node[:osmpolygons][:setup][:cfgdir]}/#{name}_config.json" do
     user   node[:osmpolygons][:user][:id]
     source 'extracts_config.json.erb'
