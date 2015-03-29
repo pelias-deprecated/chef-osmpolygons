@@ -8,7 +8,12 @@ Downloads the planet pbf, installs dependencies and extracts admin boundaries fr
 
 What hardware do I need?
 ------------------------
-TODO
+The equivalent of an AWS r3.xlarge or better: quad-core, 30GB RAM
+
+How Long Does it Take
+---------------------
+To process the planet admin boundaries on the hardware indicated above takes roughly 8 hours.
+How long processing any additional extracts from that data is variable.
 
 Contributing
 ------------
