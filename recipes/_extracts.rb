@@ -3,8 +3,6 @@
 # Recipe:: extracts
 #
 
-include_recipe 'osmpolygons::_download'
-
 # generate configs
 filename = node[:osmpolygons][:planet][:url].split('/').last
 
@@ -16,6 +14,8 @@ template "#{node[:osmpolygons][:setup][:cfgdir]}/config.json" do
     inputfile: "#{node[:osmpolygons][:setup][:datadir]}/#{filename}"
   )
 end
+
+include_recipe 'osmpolygons::_download'
 
 # create extracts if the planet is new, or
 # force extract creation regardless of whether the planet is new,

@@ -16,6 +16,7 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
   source    "#{node[:osmpolygons][:planet][:url]}.md5"
   mode      0644
   notifies  :run, 'execute[download planet]', :immediately
+  notifies  :run, 'ruby_block[verify md5]',   :immediately
 end
 
 # use wget because remote_file is incredibly awful for files this large
@@ -28,3 +29,20 @@ execute 'download planet' do
       #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
   EOH
 end
+
+ruby_block 'verify md5' do
+  action :nothing
+
+  block do
+    require 'digest'
+
+    planet_md5  = Digest::MD5.file("#{node[:osmpolygons][:setup][:datadir]}/#{filename}").hexdigest
+    md5         = File.read("#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5").split(' ').first
+
+    if planet_md5 != md5
+      Chef::Log.info('Failure: the md5 of the planet we downloaded does not appear to be correct. Aborting.')
+      abort
+    end
+  end
+end
+
