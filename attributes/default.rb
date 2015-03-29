@@ -37,7 +37,12 @@ default[:osmpolygons][:extracts][:force][:slices]        = false
 default[:osmpolygons][:extracts][:planet][:timeout]      = 43_200 # 12 hours
 default[:osmpolygons][:extracts][:planet][:kb_heap]      = '28672'
 
-default[:osmpolygons][:extracts][:hash]                  = {}
+# you can specify a path to a file containing a hash of all the extracts
+#   you want to process. Alternatively, specify the hash directly in the attribute.
+#   Defaults to empty.
+default[:osmpolygons][:extracts][:hash_by_file]          = '/etc/extracts_hash'
+default[:osmpolygons][:extracts][:hash]                  =
+  File.exist?(node[:osmpolygons][:extracts][:hash_by_file]) ? File.read(node[:osmpolygons][:extracts][:hash_by_file]) : {}
 default[:osmpolygons][:extracts][:slices][:timeout]      = 7_200  # 2 hours
 default[:osmpolygons][:extracts][:slices][:kb_heap]      = '8192'
 
