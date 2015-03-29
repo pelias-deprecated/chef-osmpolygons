@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: osmpolygons
-# Recipe:: setup
+# Recipe:: _setup
 #
 
 include_recipe 'apt::default'

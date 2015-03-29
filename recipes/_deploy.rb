@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: osmpolygons
-# Recipe:: deploy
+# Recipe:: _deploy
 #
 
 git "#{node[:osmpolygons][:setup][:basedir]}/fences-builder" do

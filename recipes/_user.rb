@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: osmpolygons
-# Recipe:: user
+# Recipe:: _user
 #
 
 # create user provided someone doesn't tell us to
