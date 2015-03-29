@@ -4,7 +4,7 @@ osmpolygons Chef Cookbook
 
 What does it do?
 ----------------
-Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data.
+Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data. Optionally,you can slice up the resulting data into smaller extracts defined by bounding boxes.
 
 What hardware do I need?
 ------------------------
@@ -17,6 +17,20 @@ Please fork, update, write specs for your changes and submit a pull.
 Usage
 -----
     include_recipe 'osmpolygons::default'
+
+This will install the required dependencies, set up the filesystem structure, download the planet pbf,
+and process admin boundary data. See the attributes file below for information on where all this is
+being placed.
+
+If you would additionally like to extract smaller regions from the resultant data, you can do so by
+passing the following hash data. Name is translated into a directory and is currently not sanitized, so
+it should not contain spaces, etc. The bbox parameter is an array containing the coordinates of the
+bbox you want to process:
+
+    node[:osmpolygons][:extracts][:slices] = {
+      "name": "some_name",
+      "bbox: [-10.000, 10.000, -10.000, 10.000]
+    }
 
 Supported Platforms
 -------------------
