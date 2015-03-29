@@ -16,7 +16,7 @@ end
 
 include_recipe 'osmpolygons::_download'
 
-# create extracts if the planet is new, or
+# create extracts is notified by the planet download if the planet is new, or
 # force extract creation regardless of whether the planet is new,
 # if that option is set.
 node[:osmpolygons][:extracts][:force][:planet] ? planet_action = :run : planet_action = :nothing
@@ -25,7 +25,6 @@ execute 'create planet extracts' do
   cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-builder"
   user        node[:osmpolygons][:user][:id]
   timeout     node[:osmpolygons][:extracts][:planet][:timeout]
-  subscribes  :run, 'execute[download planet]', :immediately
   command <<-EOH
     node app.js \
       --max-old-space-size=10000 \

@@ -22,12 +22,14 @@ node[:osmpolygons][:extracts][:slices].map do |name, bbox|
     mode  0755
   end
 
+  # runs if new planet extract data has been created, or is forced via
+  # node[:osmpolygons][:extracts][:force][:slices]
   execute "create extracts for #{name}" do
     action      slice_action
     cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer"
     user        node[:osmpolygons][:user][:id]
     timeout     node[:osmpolygons][:extracts][:slices][:timeout]
-    subscribes  :run, 'execute[download planet]', :immediately
+    subscribes  :run, 'execute[create planet extracts]', :immediately
     command <<-EOH
       node app.js \
         --max-old-space-size=10000 \

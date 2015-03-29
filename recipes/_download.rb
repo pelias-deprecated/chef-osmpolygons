@@ -15,8 +15,9 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
   backup    false
   source    "#{node[:osmpolygons][:planet][:url]}.md5"
   mode      0644
-  notifies  :run, 'execute[download planet]', :immediately
-  notifies  :run, 'ruby_block[verify md5]',   :immediately
+  notifies  :run, 'execute[download planet]',         :immediately
+  notifies  :run, 'ruby_block[verify md5]',           :immediately
+  notifies  :run, 'execute[create planet extracts]',  :immediately
 end
 
 # use wget because remote_file is incredibly awful for files this large
