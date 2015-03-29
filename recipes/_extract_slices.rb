@@ -5,7 +5,7 @@
 
 require 'json'
 
-# if the json override exists, read it and use that data
+# if the json override file exists, read it and use that data
 if File.exist?(node[:osmpolygons][:extracts][:hash_from_file])
   data = JSON.parse(File.read(node[:osmpolygons][:extracts][:hash_from_file]))
   node.set[:osmpolygons][:extracts][:hash] = data
