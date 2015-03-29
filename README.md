@@ -27,7 +27,7 @@ passing the following hash data. Name is translated into a directory and is curr
 it should not contain spaces, etc. The bbox parameter is an array containing the coordinates of the
 bbox you want to process:
 
-    node[:osmpolygons][:extracts][:slices] = {
+    node[:osmpolygons][:extracts][:hash] = {
       "name": "some_name",
       "bbox: [-10.000, 10.000, -10.000, 10.000]
     }
