@@ -33,10 +33,12 @@ default[:osmpolygons][:user][:ssh_keygen]                = false
 # extracts
 default[:osmpolygons][:extracts][:force][:planet]        = false
 default[:osmpolygons][:extracts][:force][:slices]        = false
-default[:osmpolygons][:extracts][:timeout]               = 43_200 # 12 hours
+default[:osmpolygons][:extracts][:planet][:timeout]      = 43_200 # 12 hours
+default[:osmpolygons][:extracts][:slices][:timeout]      = 7_200  # 2 hours
 default[:osmpolygons][:extracts][:hash]                  = {}
 
 # planet
 #   NOTE: must support an accompanying .md5
 #   at the same location, e.g. planet-latest.osm.pbf.md5
+default[:osmpolygons][:planet][:download_timeout]        = 7_200 # two hours
 default[:osmpolygons][:planet][:url]                     = 'http://planet.us-east-1.mapzen.com/planet-latest.osm.pbf'

@@ -23,7 +23,7 @@ end
 execute 'download planet' do
   action  :nothing
   user    node[:osmpolygons][:user][:id]
-  timeout 14_400
+  timeout node[:osmpolygons][:planet][:download_timeout]
   command <<-EOH
     wget --quiet -O \
       #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}

@@ -26,7 +26,7 @@ node[:osmpolygons][:extracts][:hash].map do |name, bbox|
     action      slice_action
     cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer"
     user        node[:osmpolygons][:user][:id]
-    timeout     node[:osmpolygons][:extracts][:timeout]
+    timeout     node[:osmpolygons][:extracts][:slices][:timeout]
     subscribes  :run, 'execute[download planet]', :immediately
     command <<-EOH
       node app.js \

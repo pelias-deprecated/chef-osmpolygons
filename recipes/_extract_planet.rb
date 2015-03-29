@@ -24,7 +24,7 @@ execute 'create planet extracts' do
   action      planet_action
   cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-builder"
   user        node[:osmpolygons][:user][:id]
-  timeout     node[:osmpolygons][:extracts][:timeout]
+  timeout     node[:osmpolygons][:extracts][:planet][:timeout]
   subscribes  :run, 'execute[download planet]', :immediately
   command <<-EOH
     node app.js \
