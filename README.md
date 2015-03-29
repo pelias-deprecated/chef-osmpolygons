@@ -30,20 +30,20 @@ being placed.
 
 If you would additionally like to extract smaller regions from the resultant data, you can do so in one of two ways. One is to directly specify the hash as shown below. Name is translated into a directory and is currently not sanitized, so it should not contain spaces, etc. The bbox parameter is an array containing the coordinates of the bbox you want to process:
 
-    node[:osmpolygons][:extracts][:hash] = {
-      "usa" => ["top", "left", "bottom", "right"]
-      "australia" => ["top", "left", "bottom", "right"]
+    default[:osmpolygons][:extracts][:hash] = {
+      "usa" => ["left", "bottom", "right", "top"],
+      "australia" => ["left", "bottom", "right", "top"]
     }
 
 The other is to create a file and specify the path to it:
 
-    node[:osmpolygons][:extracts][:hash_from_file] = '/etc/some_file_containing_json'
+    node[:osmpolygons][:extracts][:hash_from_file] = '/etc/some_file_containing_json.json'
 
 The file should contain json in the format below:
 
     {
-      "usa": ["top", "left", "bottom", "right"],
-      "australia: ["top", "left", "bottom", "right"]
+      "usa": ["left", "bottom", "right", "top"],
+      "australia": ["left", "bottom", "right", "top"]
     }
 
 Supported Platforms
