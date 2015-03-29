@@ -21,7 +21,10 @@ end
 # use wget because remote_file is incredibly awful for files this large
 execute 'download planet' do
   action  :nothing
-  command "wget --quiet -O #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
   user    node[:osmpolygons][:user][:id]
   timeout 14_400
+  command <<-EOH
+    wget --quiet -O \
+      #{node[:osmpolygons][:setup][:datadir]}/#{filename} #{node[:osmpolygons][:planet][:url]}"
+  EOH
 end
