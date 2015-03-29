@@ -3,7 +3,7 @@
 # Recipe:: extracts
 #
 
-# generate configs for planet and any extracts
+# generate configs for planet
 filename = node[:osmpolygons][:planet][:url].split('/').last
 template "#{node[:osmpolygons][:setup][:cfgdir]}/planet_config.json" do
   user   node[:osmpolygons][:user][:id]
@@ -12,19 +12,6 @@ template "#{node[:osmpolygons][:setup][:cfgdir]}/planet_config.json" do
     outputdir: node[:osmpolygons][:setup][:outputdir][:planet],
     inputfile: "#{node[:osmpolygons][:setup][:datadir]}/#{filename}"
   )
-end
-
-node[:osmpolygons][:extracts][:hash].map do |name, bbox|
-  template "#{node[:osmpolygons][:setup][:cfgdir]}/#{name}_config.json" do
-    user   node[:osmpolygons][:user][:id]
-    source 'extracts_config.json.erb'
-    variables(
-      inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
-      outputdir: node[:osmpolygons][:setup][:outputdir][:extracts],
-      name: name,
-      box: bbox
-    )
-  end
 end
 
 include_recipe 'osmpolygons::_download'
@@ -51,6 +38,17 @@ end
 # generate configs for each extract in our hash
 node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extracts][:hash].map do |name, bbox|
+  template "#{node[:osmpolygons][:setup][:cfgdir]}/#{name}_config.json" do
+    user   node[:osmpolygons][:user][:id]
+    source 'extracts_config.json.erb'
+    variables(
+      inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
+      outputdir: node[:osmpolygons][:setup][:outputdir][:extracts],
+      name: name,
+      box: bbox
+    )
+  end
+
   execute "create extracts for #{name}" do
     action      slice_action
     cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer"
