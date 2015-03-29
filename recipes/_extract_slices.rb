@@ -32,7 +32,7 @@ node[:osmpolygons][:extracts][:slices].map do |name, bbox|
     subscribes  :run, 'execute[create planet extracts]', :immediately
     command <<-EOH
       node app.js \
-        --max-old-space-size=10000 \
+        --max-old-space-size=#{node[:osmpolygons][:extracts][:slices][:kb_heap]} \
         >#{node[:osmpolygons][:setup][:logdir]}/#{name}_extract.log \
         2>#{node[:osmpolygons][:setup][:logdir]}/#{name}_extract.err
     EOH

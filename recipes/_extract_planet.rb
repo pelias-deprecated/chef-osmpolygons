@@ -27,7 +27,7 @@ execute 'create planet extracts' do
   timeout     node[:osmpolygons][:extracts][:planet][:timeout]
   command <<-EOH
     node app.js \
-      --max-old-space-size=10000 \
+      --max-old-space-size=#{node[:osmpolygons][:extracts][:planet][:kb_heap]} \
       >#{node[:osmpolygons][:setup][:logdir]}/planet_extract.log \
       2>#{node[:osmpolygons][:setup][:logdir]}/planet_extract.err
   EOH
