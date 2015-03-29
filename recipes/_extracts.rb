@@ -23,7 +23,7 @@ include_recipe 'osmpolygons::_download'
 node[:osmpolygons][:extracts][:force] ? run_action = :run : run_action = :nothing
 execute 'create extracts' do
   action      run_action
-  cwd         "#{node[:osmpolygons][:setup][:basedir]}/openstreetmap-polygons"
+  cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-builder"
   user        node[:osmpolygons][:user][:id]
   timeout     node[:osmpolygons][:extracts][:timeout]
   subscribes  :run, 'execute[download planet]', :immediately
