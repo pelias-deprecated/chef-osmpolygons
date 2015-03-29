@@ -13,13 +13,6 @@ deploy "#{node[:osmpolygons][:setup][:basedir]}/fences-builder" do
   create_dirs_before_symlink %w(tmp public config deploy)
   symlink_before_migrate.clear
 end
-execute 'npm install builder' do
-  action  :nothing
-  user    node[:osmpolygons][:user][:id]
-  command 'npm install'
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-builder/current"
-  environment('HOME' => "#{node[:osmpolygons][:setup][:basedir]}/fences-builder/current")
-end
 
 deploy "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer" do
   user      node[:osmpolygons][:user][:id]
@@ -31,10 +24,13 @@ deploy "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer" do
   create_dirs_before_symlink %w(tmp public config deploy)
   symlink_before_migrate.clear
 end
-execute 'npm install slicer' do
-  action  :nothing
-  user    node[:osmpolygons][:user][:id]
-  command 'npm install'
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer/current"
-  environment('HOME' => "#{node[:osmpolygons][:setup][:basedir]}/fences-slicer/current")
+
+%w(builder slicer).each do |fence|
+  execute "npm install #{fence}" do
+    action  :nothing
+    user    node[:osmpolygons][:user][:id]
+    command 'npm install'
+    cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-#{fence}/current"
+    environment('HOME' => "#{node[:osmpolygons][:setup][:basedir]}/fences-#{fence}/current")
+  end
 end
