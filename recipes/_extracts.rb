@@ -3,7 +3,7 @@
 # Recipe:: extracts
 #
 
-# generate configs for planet
+# generate config for planet
 filename = node[:osmpolygons][:planet][:url].split('/').last
 template "#{node[:osmpolygons][:setup][:cfgdir]}/planet_config.json" do
   user   node[:osmpolygons][:user][:id]
@@ -43,10 +43,15 @@ node[:osmpolygons][:extracts][:hash].map do |name, bbox|
     source 'extracts_config.json.erb'
     variables(
       inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
-      outputdir: node[:osmpolygons][:setup][:outputdir][:extracts],
+      outputdir: "#{node[:osmpolygons][:setup][:outputdir][:extracts]}/#{name}",
       name: name,
       box: bbox
     )
+  end
+
+  directory "#{node[:osmpolygons][:setup][:outputdir][:extracts]}/#{name}" do
+    user  node[:osmpolygons][:user][:id]
+    mode  0755
   end
 
   execute "create extracts for #{name}" do
