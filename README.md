@@ -1,4 +1,4 @@
-osmpolygons Chef Cookbook
+osmpolygons
 ===========
 [![Build Status](https://circleci.com/gh/mapzen/chef-osmpolygons.svg?style=svg)](https://circleci.com/gh/mapzen/chef-osmpolygons)
 
