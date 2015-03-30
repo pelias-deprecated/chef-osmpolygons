@@ -17,7 +17,7 @@ end
 
 # build extracts after doing some validation of the data. These would
 #   fail when anyway when it came time to process them, but it seems like
-#   a nice addition to be able to pinpoint where the failure would occur 
+#   a nice addition to be able to pinpoint where the failure would occur
 #   ahead of time.
 node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extracts][:hash].map do |name, bbox|
