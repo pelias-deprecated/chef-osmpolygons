@@ -15,7 +15,10 @@ if File.exist?(node[:osmpolygons][:extracts][:hash_from_file])
   node.set[:osmpolygons][:extracts][:hash] = data
 end
 
-# generate configs for each extract in our hash
+# build extracts after doing some validation of the data. These would
+#   fail when anyway when it came time to process them, but it seems like
+#   a nice addition to be able to pinpoint where the failure would occur 
+#   ahead of time.
 node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extracts][:hash].map do |name, bbox|
   sanitized_name = sanitize(name)
