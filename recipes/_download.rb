@@ -4,8 +4,10 @@
 #
 
 # override tempfile location so the download
-#   temp file goes somewhere with enough space
-ENV['TMP'] = node[:osmpolygons][:setup][:datadir]
+#   temp file goes somewhere with enough space.
+#   NOTE: this is a holdover from using remote_file
+#   to download the planet. Remove in favor of wget.
+# ENV['TMP'] = node[:osmpolygons][:setup][:datadir]
 
 filename = node[:osmpolygons][:planet][:url].split('/').last
 fail if filename !~ /\.pbf$/
