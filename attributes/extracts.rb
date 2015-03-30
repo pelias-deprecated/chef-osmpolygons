@@ -14,9 +14,7 @@ default[:osmpolygons][:extracts][:planet][:kb_heap] = '28672'
 #   Alternatively, specify the hash directly in the attribute.
 #   Defaults to empty.
 #
-default[:osmpolygons][:extracts][:hash]             = {
-  "usa" => ["5.9559","45.818","10.4921","47.8084"]
-}
+default[:osmpolygons][:extracts][:hash]             = {}
 default[:osmpolygons][:extracts][:hash_from_file]   = '/etc/extracts.json'
 default[:osmpolygons][:extracts][:slices][:timeout] = 7_200  # 2 hours
 default[:osmpolygons][:extracts][:slices][:kb_heap] = '8192'
