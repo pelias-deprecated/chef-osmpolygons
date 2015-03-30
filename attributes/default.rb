@@ -25,10 +25,11 @@ default[:osmpolygons][:deploy][:slicer_revision]         = 'master'
 # user
 default[:osmpolygons][:user][:id]                        = 'poly'
 default[:osmpolygons][:user][:uid]                       = 2002
+default[:osmpolygons][:user][:home]                      = node[:osmpolygons][:setup][:basedir]
 default[:osmpolygons][:user][:shell]                     = '/bin/bash'
+default[:osmpolygons][:user][:ssh_keygen]                = false
 default[:osmpolygons][:user][:manage_home]               = false
 default[:osmpolygons][:user][:create_group]              = true
-default[:osmpolygons][:user][:ssh_keygen]                = false
 
 # extracts
 default[:osmpolygons][:extracts][:force][:planet]        = false
