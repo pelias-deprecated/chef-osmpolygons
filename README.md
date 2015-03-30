@@ -26,7 +26,7 @@ This will install the required dependencies, set up the filesystem structure, do
 and process admin boundary data. See the attributes file below for information on where all this is
 being placed.
 
-If you would additionally like to extract smaller regions from the resultant data, you can do so in one of two ways. The first is to directly specify the hash as an attribute value, as shown below. Name is translated into a directory and is currently not sanitized, so it should not contain spaces, etc. The bbox parameter is an array containing the coordinates of the bbox you want to process:
+If you would additionally like to extract smaller regions from the resultant data, you can do so in one of two ways. The first is to directly specify the hash as an attribute value, as shown below. Name is translated into a directory (the input will be sanitized if you use spaces, etc). The bbox parameter is an array containing the coordinates of the bbox you want to process:
 
     default[:osmpolygons][:extracts][:hash] = {
       "usa" => ["left", "bottom", "right", "top"],
@@ -45,6 +45,13 @@ The file should contain json in the format below:
       "australia": ["left", "bottom", "right", "top"]
     }
 ```
+
+In either case, the bbox will be validated for the following conditions:
+- is it an array?
+- does it contain four elements?
+- do the elements produce a valid bounding box?
+
+Failure of any condition will abort the run.
 
 Supported Platforms
 -------------------
