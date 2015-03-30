@@ -33,7 +33,7 @@ If you would additionally like to extract smaller regions from the resultant dat
       "australia" => ["left", "bottom", "right", "top"]
     }
 
-The second method is to create a file and specify the path to it:
+The second method is to create a file and specify the path to it. This file should be managed directly via a process outside of this cookbook (i.e. in a wrapper cookbook):
 
     node[:osmpolygons][:extracts][:hash_from_file] = '/etc/some_file_containing_json.json'
 
