@@ -39,10 +39,12 @@ The second method is to create a file and specify the path to it:
 
 The file should contain json in the format below:
 
+```json
     {
       "usa": ["left", "bottom", "right", "top"],
       "australia": ["left", "bottom", "right", "top"]
     }
+```
 
 Supported Platforms
 -------------------
