@@ -20,6 +20,7 @@ end
   node[:osmpolygons][:setup][:cfgdir],
   node[:osmpolygons][:setup][:datadir],
   node[:osmpolygons][:setup][:tempdir],
+  node[:osmpolygons][:setup][:outputdir],
   node[:osmpolygons][:setup][:outputdir][:planet],
   node[:osmpolygons][:setup][:outputdir][:slices]
 ].each do |dir|
