@@ -8,12 +8,12 @@ Downloads the planet pbf, installs dependencies and extracts admin boundaries fr
 
 What hardware do I need?
 ------------------------
-* ~150GB of free disk space
+* ~125GB of free disk space
 * ~12GB of free RAM
 
 How Long Does it Take
 ---------------------
-* ~5 hours
+* ~4-8 hours
   * this is largely dependent on the both disk speed for the initial conversion process, and on single cpu core speed for the build process
 
 Contributing
