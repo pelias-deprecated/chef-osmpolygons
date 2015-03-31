@@ -54,14 +54,14 @@ node[:osmpolygons][:extracts][:slices][:hash].map do |name, bbox|
     user   node[:osmpolygons][:user][:id]
     source 'extracts_config.json.erb'
     variables(
-      inputdir: node[:osmpolygons][:setup][:outputdir][:extracts][:planet],
-      outputdir: "#{node[:osmpolygons][:setup][:outputdir][:extracts][:slices]}/#{sanitized_name}",
+      inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
+      outputdir: "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}",
       name: sanitized_name,
       bbox: bbox
     )
   end
 
-  directory "#{node[:osmpolygons][:setup][:outputdir][:extracts][:slices]}/#{sanitized_name}" do
+  directory "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}" do
     user  node[:osmpolygons][:user][:id]
     mode  0755
   end

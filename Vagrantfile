@@ -76,9 +76,9 @@ Vagrant.configure('2') do |config|
         },
         'extracts' => {
           'force' => {
-            'prep' => true,
-            'build' => true,
-            'slices' => true
+            'prep' => false,
+            'build' => false,
+            'slices' => false
           }
         }
       }
