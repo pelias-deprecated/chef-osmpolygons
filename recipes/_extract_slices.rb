@@ -73,7 +73,7 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
       ./bin/fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json \
         #{node[:osmpolygons][:setup][:outputdir][:planet]} \
         #{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name} >\
-        #{node[:osmpolygons][:setup][:logdir]}/slice.log 2>&1
+        #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1
     EOH
   end
 end
