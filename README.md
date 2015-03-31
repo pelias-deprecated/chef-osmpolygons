@@ -16,7 +16,7 @@ TODO
 
 Contributing
 ------------
-Please fork, update, write specs for your changes and submit a pull.
+Please fork and create a pull request. At a minimum, verify that your changes are passing basic syntax tests via `bundle install && bundle exec rake`.
 
 Usage
 -----
