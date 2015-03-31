@@ -42,7 +42,8 @@ The file should contain json in the format below:
 ```json
     {
       "usa": ["left", "bottom", "right", "top"],
-      "australia": ["left", "bottom", "right", "top"]
+      "australia": ["left", "bottom", "right", "top"],
+      "ad_infinitum": [...]
     }
 ```
 
