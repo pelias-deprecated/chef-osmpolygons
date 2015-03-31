@@ -19,4 +19,5 @@ default[:osmpolygons][:extracts][:slices][:timeout] = 43_200  # 12 hours
 #   NOTE: must support an accompanying .md5
 #   at the same location, e.g. planet-latest.osm.pbf.md5
 default[:osmpolygons][:planet][:download_timeout]   = 7_200 # two hours
+default[:osmpolygons][:planet][:verify_checksum]    = true
 default[:osmpolygons][:planet][:url]                = 'http://planet.us-east-1.mapzen.com/planet-latest.osm.pbf'

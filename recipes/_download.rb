@@ -45,4 +45,5 @@ ruby_block 'verify md5' do
       abort
     end
   end
+  only_if { node[:osmpolygons][:planet][:verify_checksum] == true }
 end
