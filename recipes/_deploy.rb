@@ -3,8 +3,12 @@
 # Recipe:: _deploy
 #
 
-# TODO: convert this to install from npm
+# TODO: convert this to install from npm when published
 #
+# nodejs_npm 'fences-cli' do
+#   version node[:osmpolygons][:fences_cli][:version]
+# end
+
 deploy "#{node[:osmpolygons][:setup][:basedir]}/fences-cli" do
   user        node[:osmpolygons][:user][:id]
   repository  node[:osmpolygons][:fences_cli][:repository]
