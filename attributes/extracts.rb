@@ -4,17 +4,17 @@
 #
 
 # force run regardless of whether planet data is new
-default[:osmpolygons][:extracts][:force][:prep]     = false
-default[:osmpolygons][:extracts][:force][:build]    = false
-default[:osmpolygons][:extracts][:force][:slices]   = false
+default[:osmpolygons][:extract][:force][:prep]      = false
+default[:osmpolygons][:extract][:force][:build]     = false
+default[:osmpolygons][:extract][:force][:slices]    = false
 
-default[:osmpolygons][:extracts][:prep][:timeout]   = 7_200   # 2 hours
-default[:osmpolygons][:extracts][:build][:timeout]  = 21_600  # 6 hours
+default[:osmpolygons][:extract][:prep][:timeout]    = 7_200   # 2 hours
+default[:osmpolygons][:extract][:build][:timeout]   = 21_600  # 6 hours
 
 # see README
-default[:osmpolygons][:extracts][:slices][:hash]    = {}
-default[:osmpolygons][:extracts][:slices][:file]    = '/etc/osmpoly_extracts.json'
-default[:osmpolygons][:extracts][:slices][:timeout] = 3_600 # one hour per slice
+default[:osmpolygons][:extract][:slices][:hash]     = {}
+default[:osmpolygons][:extract][:slices][:file]     = '/etc/osmpoly_slices.json'
+default[:osmpolygons][:extract][:slices][:timeout]  = 3_600 # one hour per slice
 
 # planet
 #   NOTE: must support an accompanying .md5
