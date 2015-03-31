@@ -3,8 +3,6 @@
 # Attributes:: setup
 #
 
-default[:osmpolygons][:fences_cli][:version]       = '0.0.1'
-
 default[:osmpolygons][:setup][:basedir]            = '/mnt/poly'
 default[:osmpolygons][:setup][:logdir]             = "#{node[:osmpolygons][:setup][:basedir]}/logs"
 default[:osmpolygons][:setup][:datadir]            = "#{node[:osmpolygons][:setup][:basedir]}/data"
