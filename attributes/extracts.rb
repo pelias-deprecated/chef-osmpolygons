@@ -9,7 +9,7 @@
 #   process new slices.
 default[:osmpolygons][:extract][:force][:prep]      = false
 default[:osmpolygons][:extract][:force][:build]     = false
-default[:osmpolygons][:extract][:force][:slices]    = false
+default[:osmpolygons][:extract][:force][:slice]     = false
 
 default[:osmpolygons][:extract][:prep][:timeout]    = 7_200   # 2 hours
 default[:osmpolygons][:extract][:build][:timeout]   = 21_600  # 6 hours

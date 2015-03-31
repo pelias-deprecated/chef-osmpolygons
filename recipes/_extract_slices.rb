@@ -19,7 +19,7 @@ end
 #   fail when anyway when it came time to process them, but it seems like
 #   a nice addition to be able to pinpoint where the failure would occur
 #   ahead of time.
-node[:osmpolygons][:extract][:force][:slices] ? slice_action = :run : slice_action = :nothing
+node[:osmpolygons][:extract][:force][:slice] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
   sanitized_name = sanitize(name)
 
