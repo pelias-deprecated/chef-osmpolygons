@@ -12,8 +12,7 @@ node[:osmpolygons][:extracts][:force][:prep] ? prep_action = :run : prep_action 
 execute 'prep planet' do
   action  prep_action
   user    node[:osmpolygons][:user][:id]
-  # cwd     node[:osmpolygons][:setup][:tempdir]
-  cwd     '/tmp/fences-cli'
+  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extracts][:prep][:timeout]
   command <<-EOH
     ./bin/fences prep -t \
@@ -29,8 +28,7 @@ node[:osmpolygons][:extracts][:force][:build] ? build_action = :run : build_acti
 execute 'build planet' do
   action  build_action
   user    node[:osmpolygons][:user][:id]
-  # cwd     node[:osmpolygons][:setup][:tempdir]
-  cwd     '/tmp/fences-cli'
+  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extracts][:build][:timeout]
   command <<-EOH
     ./bin/fences build #{node[:osmpolygons][:setup][:datadir]}/planet-filtered.pbf \
@@ -45,8 +43,7 @@ node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_act
 execute 'slice regions' do
   action  slice_action
   user    node[:osmpolygons][:user][:id]
-  # cwd     node[:osmpolygons][:setup][:tempdir]
-  cwd     '/tmp/fences-cli'
+  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extracts][:slices][:timeout]
   command <<-EOH
     ./bin/fences slice #{node[:osmpolygons][:extracts][:slices][:file]} \

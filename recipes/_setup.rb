@@ -12,8 +12,6 @@ include_recipe 'nodejs::default'
 
 %w(
   git
-  gdal-bin
-  osmctools
   build-essential
 ).each do |p|
   package p
@@ -34,3 +32,5 @@ end
     recursive true
   end
 end
+
+include_recipe 'osmpolygons::_deploy'
