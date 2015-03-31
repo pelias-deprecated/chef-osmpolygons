@@ -10,9 +10,8 @@ default[:osmpolygons][:extracts][:force][:slices]   = false
 default[:osmpolygons][:extracts][:prep][:timeout]   = 43_200 # 12 hours
 default[:osmpolygons][:extracts][:build][:timeout]  = 43_200 # 12 hours
 
-# if this file exists we'll process regional slices
 default[:osmpolygons][:extracts][:slices][:hash]    = {}
-default[:osmpolygons][:extracts][:slices][:file]    = '/etc/extracts.json'
+default[:osmpolygons][:extracts][:slices][:file]    = '/etc/osmpoly_extracts.json'
 default[:osmpolygons][:extracts][:slices][:timeout] = 43_200  # 12 hours
 
 # planet
