@@ -10,7 +10,7 @@ def sanitize(input)
 end
 
 # if attribute hash is empty and the json override file exists, read it and use that data
-if node[:osmpolygons][:extract][:slices][:hash].emtpy? && File.exist?(node[:osmpolygons][:extract][:slices][:file])
+if node[:osmpolygons][:extract][:slices][:hash].empty? && File.exist?(node[:osmpolygons][:extract][:slices][:file])
   data = JSON.parse(File.read(node[:osmpolygons][:extract][:slices][:file]))
   node.set[:osmpolygons][:extract][:slices][:hash] = data
 end
