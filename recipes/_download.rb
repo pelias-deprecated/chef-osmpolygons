@@ -18,7 +18,6 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
 
   notifies  :run, 'execute[prep planet]',     :immediately
   notifies  :run, 'execute[build planet]',    :immediately
-  notifies  :run, 'execute[slice regions]',   :immediately
 end
 
 # use wget because remote_file is incredibly awful for files this large

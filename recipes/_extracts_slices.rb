@@ -77,6 +77,5 @@ node[:osmpolygons][:extracts][:slices][:hash].map do |name, bbox|
         #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
         #{node[:osmpolygons][:setup][:logdir]}/slice.log 2>&1
     EOH
-    only_if { ::File.exist?(node[:osmpolygons][:extracts][:slices][:file]) }
   end
 end
