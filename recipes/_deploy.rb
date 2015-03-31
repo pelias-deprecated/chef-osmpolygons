@@ -4,7 +4,7 @@
 #
 
 deploy "#{node[:osmpolygons][:setup][:basedir]}/fences-cli" do
-  user        node[:osmpolygons][:user][:name]
+  user        node[:osmpolygons][:user][:id]
   repository  node[:osmpolygons][:fences_cli][:repository]
   revision    node[:osmpolygons][:fences_cli][:revision]
   migrate     false
@@ -17,7 +17,7 @@ end
 
 execute 'npm install fences-cli' do
   action  :nothing
-  user    node[:osmpolygons][:user][:name]
+  user    node[:osmpolygons][:user][:id]
   command 'npm install'
   cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   environment('HOME' => node[:osmpolygons][:user][:home])
