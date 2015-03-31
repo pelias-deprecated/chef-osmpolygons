@@ -8,6 +8,7 @@ Downloads the planet pbf, installs dependencies and extracts admin boundaries fr
 
 What hardware do I need?
 ------------------------
+* 100GB of free disk space
 TODO
 
 How Long Does it Take
@@ -23,8 +24,7 @@ Usage
     include_recipe 'osmpolygons::default'
 
 This will install the required dependencies, set up the filesystem structure, download the planet pbf,
-and process admin boundary data. See the attributes file below for information on where all this is
-being placed.
+and process admin boundary data. See the default [attributes](https://github.com/pelias/chef-osmpolygons/blob/master/attributes/default.rb) file to see (or override) where all this is being placed.
 
 If you would additionally like to extract smaller regions from the resultant data, you can do so in one of two ways. The first is to directly specify the hash as an attribute value, as shown below. Name is translated into a directory (the input will be sanitized if you use spaces, etc). The bbox parameter is an array containing the coordinates of the bbox you want to process:
 
