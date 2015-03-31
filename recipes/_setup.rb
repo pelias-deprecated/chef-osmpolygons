@@ -14,6 +14,10 @@ include_recipe 'nodejs::default'
   package p
 end
 
+# nodejs_npm 'fences-cli' do
+#   version node[:osmpolygons][:fences_cli][:version]
+# end
+
 [
   node[:osmpolygons][:setup][:basedir],
   node[:osmpolygons][:setup][:logdir],
