@@ -9,8 +9,8 @@ def sanitize(input)
   input.gsub(/[^0-9A-z.\-]/, '_')
 end
 
-# if the json override file exists, read it and use that data
-if File.exist?(node[:osmpolygons][:extracts][:slices][:file])
+# if attribute hash is empty and the json override file exists, read it and use that data
+if node[:osmpolygons][:extracts][:slices][:hash].emtpy? && File.exist?(node[:osmpolygons][:extracts][:slices][:file])
   data = JSON.parse(File.read(node[:osmpolygons][:extracts][:slices][:file]))
   node.set[:osmpolygons][:extracts][:slices][:hash] = data
 end
