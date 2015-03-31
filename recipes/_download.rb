@@ -3,12 +3,7 @@
 # Recipe:: _download
 #
 
-# override tempfile location so the download
-#   temp file goes somewhere with enough space.
-#   NOTE: this is a holdover from using remote_file
-#   to download the planet. Remove in favor of wget.
-# ENV['TMP'] = node[:osmpolygons][:setup][:datadir]
-
+# verify it's a pbf we're being told to download
 filename = node[:osmpolygons][:planet][:url].split('/').last
 fail if filename !~ /\.pbf$/
 
@@ -17,9 +12,13 @@ remote_file "#{node[:osmpolygons][:setup][:datadir]}/#{filename}.md5" do
   backup    false
   source    "#{node[:osmpolygons][:planet][:url]}.md5"
   mode      0644
-  notifies  :run, 'execute[download planet]',         :immediately
-  notifies  :run, 'ruby_block[verify md5]',           :immediately
-  notifies  :run, 'execute[create planet extracts]',  :immediately
+
+  notifies  :run, 'execute[download planet]', :immediately
+  notifies  :run, 'ruby_block[verify md5]',   :immediately
+
+  notifies  :run, 'execute[prep planet]',     :immediately
+  notifies  :run, 'execute[build planet]',    :immediately
+  notifies  :run, 'execute[slice regions]',   :immediately
 end
 
 # use wget because remote_file is incredibly awful for files this large

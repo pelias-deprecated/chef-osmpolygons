@@ -6,7 +6,7 @@ Vagrant.configure('2') do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = 'metroextractor'
+  config.vm.hostname = 'osmpolygons'
 
   config.vm.box     = 'ubuntu-14.04'
   config.vm.box_url = 'https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box'
@@ -70,6 +70,18 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
+      'osmpolygons' => {
+        'planet' => {
+          'url' => 'http://download.geofabrik.de/europe/italy-latest.osm.pbf'
+        },
+        'extracts' => {
+          'force' => {
+            'prep' => true,
+            'build' => true,
+            'slices' => true
+          }
+        }
+      }
     }
 
     chef.run_list = [

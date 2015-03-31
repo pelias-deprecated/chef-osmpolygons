@@ -3,21 +3,16 @@
 # Attributes:: extracts
 #
 
-default[:osmpolygons][:extracts][:force][:planet]   = false
+default[:osmpolygons][:extracts][:force][:prep]     = false
+default[:osmpolygons][:extracts][:force][:build]    = false
 default[:osmpolygons][:extracts][:force][:slices]   = false
 
-default[:osmpolygons][:extracts][:planet][:timeout] = 43_200 # 12 hours
-default[:osmpolygons][:extracts][:planet][:kb_heap] = '28672'
+default[:osmpolygons][:extracts][:prep][:timeout]   = 43_200 # 12 hours
+default[:osmpolygons][:extracts][:build][:timeout]  = 43_200 # 12 hours
 
-# You can specify a path to a file containing json of all the extracts you want
-#   to process. If it exists we'll read the contents into the attribute.
-#   Alternatively, specify the hash directly in the attribute.
-#   Defaults to empty.
-#
-default[:osmpolygons][:extracts][:hash]             = {}
-default[:osmpolygons][:extracts][:hash_from_file]   = '/etc/extracts.json'
-default[:osmpolygons][:extracts][:slices][:timeout] = 7_200  # 2 hours
-default[:osmpolygons][:extracts][:slices][:kb_heap] = '8192'
+# if this file exists we'll process regional slices
+default[:osmpolygons][:extracts][:slices][:file]    = '/etc/extracts.json'
+default[:osmpolygons][:extracts][:slices][:timeout] = 43_200  # 12 hours
 
 # planet
 #   NOTE: must support an accompanying .md5

@@ -6,9 +6,14 @@
 include_recipe 'apt::default'
 include_recipe 'nodejs::default'
 
+# nodejs_npm 'fences-cli' do
+#  version node[:osmpolygons][:setup][:fences_cli][:version]
+# end
+
 %w(
   git
   gdal-bin
+  osmctools
   build-essential
 ).each do |p|
   package p
@@ -19,8 +24,9 @@ end
   node[:osmpolygons][:setup][:logdir],
   node[:osmpolygons][:setup][:cfgdir],
   node[:osmpolygons][:setup][:datadir],
+  node[:osmpolygons][:setup][:tempdir],
   node[:osmpolygons][:setup][:outputdir][:planet],
-  node[:osmpolygons][:setup][:outputdir][:extracts]
+  node[:osmpolygons][:setup][:outputdir][:slices]
 ].each do |dir|
   directory dir do
     user      node[:osmpolygons][:user][:id]
