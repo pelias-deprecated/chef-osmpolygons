@@ -72,7 +72,7 @@ Vagrant.configure('2') do |config|
     chef.json = {
       'osmpolygons' => {
         'planet' => {
-          'url' => 'http://download.geofabrik.de/europe/italy-latest.osm.pbf'
+          'url' => 'http://download.geofabrik.de/europe/cyprus-latest.osm.pbf'
         },
         'extracts' => {
           'force' => {
