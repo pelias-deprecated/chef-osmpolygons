@@ -1,31 +1,14 @@
 #
 # Cookbook Name:: osmpolygons
-# Attributes:: default
+# Attributes:: setup
 #
 
-# setup
-default[:osmpolygons][:setup][:basedir]     = '/mnt/poly'
-default[:osmpolygons][:setup][:logdir]      = "#{node[:osmpolygons][:setup][:basedir]}/logs"
-default[:osmpolygons][:setup][:cfgdir]      = "#{node[:osmpolygons][:setup][:basedir]}/etc"
-default[:osmpolygons][:setup][:datadir]     = "#{node[:osmpolygons][:setup][:basedir]}/data"
-default[:osmpolygons][:setup][:outputdir]   = "#{node[:osmpolygons][:setup][:basedir]}/output"
+default[:osmpolygons][:fences_cli][:version]       = '0.0.1'
 
-# deploy
-default[:osmpolygons][:deploy][:repo]       = 'https://github.com/pelias/openstreetmap-polygons.git'
-default[:osmpolygons][:deploy][:revision]   = 'master'
-
-# user
-default[:osmpolygons][:user][:id]           = 'poly'
-default[:osmpolygons][:user][:uid]          = 2002
-default[:osmpolygons][:user][:shell]        = '/bin/bash'
-default[:osmpolygons][:user][:manage_home]  = false
-default[:osmpolygons][:user][:create_group] = true
-default[:osmpolygons][:user][:ssh_keygen]   = false
-
-# extracts
-default[:osmpolygons][:extracts][:force]    = false
-default[:osmpolygons][:extracts][:timeout]  = 7_200 # 2 hours
-default[:osmpolygons][:extracts][:array]    = %w(
-  http://download.geofabrik.de/north-america/us/rhode-island-latest.osm.pbf
-  http://download.geofabrik.de/north-america/us/hawaii-latest.osm.pbf
-)
+default[:osmpolygons][:setup][:basedir]            = '/mnt/poly'
+default[:osmpolygons][:setup][:logdir]             = "#{node[:osmpolygons][:setup][:basedir]}/logs"
+default[:osmpolygons][:setup][:datadir]            = "#{node[:osmpolygons][:setup][:basedir]}/data"
+default[:osmpolygons][:setup][:cfgdir]             = "#{node[:osmpolygons][:setup][:basedir]}/etc"
+default[:osmpolygons][:setup][:tempdir]            = "#{node[:osmpolygons][:setup][:basedir]}/temp"
+default[:osmpolygons][:setup][:outputdir][:planet] = "#{node[:osmpolygons][:setup][:basedir]}/output/planet"
+default[:osmpolygons][:setup][:outputdir][:slices] = "#{node[:osmpolygons][:setup][:basedir]}/output/slices"

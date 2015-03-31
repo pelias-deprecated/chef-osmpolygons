@@ -15,7 +15,7 @@ Vagrant.configure('2') do |config|
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
-  config.vm.network :private_network, ip: '33.33.33.10'
+  config.vm.network :private_network, ip: '10.10.10.103'
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -70,15 +70,21 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      "nodejs" => {
-        "install_method" => "binary",
-        "version" => "0.10.36",
-        "checksum_linux_x64" => "2bc13477684a9fe534bdc9d8f4a8caf6257a11953b57c42cad9b919ee259a0d5"
+      'osmpolygons' => {
+        'planet' => {
+          'url' => 'http://download.geofabrik.de/europe/italy-latest.osm.pbf'
+        },
+        'extracts' => {
+          'force' => {
+            'prep' => false,
+            'build' => false,
+            'slices' => false
+          }
+        }
       }
     }
 
     chef.run_list = [
-      'recipe[nodejs::default]',
       'recipe[osmpolygons::default]'
     ]
   end
