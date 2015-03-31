@@ -8,8 +8,8 @@ default[:osmpolygons][:extracts][:force][:prep]     = false
 default[:osmpolygons][:extracts][:force][:build]    = false
 default[:osmpolygons][:extracts][:force][:slices]   = false
 
-default[:osmpolygons][:extracts][:prep][:timeout]   = 43_200 # 12 hours
-default[:osmpolygons][:extracts][:build][:timeout]  = 43_200 # 12 hours
+default[:osmpolygons][:extracts][:prep][:timeout]   = 7_200   # 2 hours
+default[:osmpolygons][:extracts][:build][:timeout]  = 21_600  # 6 hours
 
 # see README
 default[:osmpolygons][:extracts][:slices][:hash]    = {}
