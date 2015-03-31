@@ -37,19 +37,3 @@ execute 'build planet' do
   EOH
   environment('HOME' => node[:osmpolygons][:user][:home])
 end
-
-# cut region slices if the file exists
-node[:osmpolygons][:extracts][:force][:slices] ? slice_action = :run : slice_action = :nothing
-execute 'slice regions' do
-  action  slice_action
-  user    node[:osmpolygons][:user][:id]
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
-  timeout node[:osmpolygons][:extracts][:slices][:timeout]
-  command <<-EOH
-    ./bin/fences slice #{node[:osmpolygons][:extracts][:slices][:file]} \
-      #{node[:osmpolygons][:setup][:outputdir][:planet]} \
-      #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
-      #{node[:osmpolygons][:setup][:logdir]}/slice.log 2>&1
-  EOH
-  only_if { ::File.exist?(node[:osmpolygons][:extracts][:slices][:file]) }
-end
