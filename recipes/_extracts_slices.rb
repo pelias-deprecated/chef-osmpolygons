@@ -54,8 +54,6 @@ node[:osmpolygons][:extracts][:slices][:hash].map do |name, bbox|
     user   node[:osmpolygons][:user][:id]
     source 'extracts_config.json.erb'
     variables(
-      inputdir: node[:osmpolygons][:setup][:outputdir][:planet],
-      outputdir: "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}",
       name: sanitized_name,
       bbox: bbox
     )
@@ -75,7 +73,7 @@ node[:osmpolygons][:extracts][:slices][:hash].map do |name, bbox|
     command <<-EOH
       ./bin/fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json \
         #{node[:osmpolygons][:setup][:outputdir][:planet]} \
-        #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
+        #{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name} >\
         #{node[:osmpolygons][:setup][:logdir]}/slice.log 2>&1
     EOH
   end
