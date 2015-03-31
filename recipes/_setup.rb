@@ -12,6 +12,7 @@ include_recipe 'nodejs::default'
 
 %w(
   git
+  zlib1g-dev
   build-essential
 ).each do |p|
   package p
