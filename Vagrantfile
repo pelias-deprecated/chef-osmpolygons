@@ -74,10 +74,10 @@ Vagrant.configure('2') do |config|
         'planet' => {
           'url' => 'http://download.geofabrik.de/europe/cyprus-latest.osm.pbf'
         },
-        'extracts' => {
+        'extract' => {
           'force' => {
-            'prep' => false,
-            'build' => false,
+            'prep' => true,
+            'build' => true,
             'slices' => false
           }
         }

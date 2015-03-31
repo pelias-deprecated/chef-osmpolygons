@@ -69,7 +69,6 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
     user        node[:osmpolygons][:user][:id]
     cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
     timeout     node[:osmpolygons][:extract][:slices][:timeout]
-    subscribes  :run, 'execute[build planet]', :immediately
     command <<-EOH
       ./bin/fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json \
         #{node[:osmpolygons][:setup][:outputdir][:planet]} \

@@ -3,7 +3,10 @@
 # Attributes:: extracts
 #
 
-# force run regardless of whether planet data is new
+# the planet prep and build steps subscribe to the download of new planet
+#   data. You can force them to run by setting the below to true. Slice creation
+#   does not subscribe to the download of new data. You must set it to true to
+#   process new slices.
 default[:osmpolygons][:extract][:force][:prep]      = false
 default[:osmpolygons][:extract][:force][:build]     = false
 default[:osmpolygons][:extract][:force][:slices]    = false
