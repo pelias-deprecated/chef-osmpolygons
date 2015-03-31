@@ -6,10 +6,6 @@
 include_recipe 'apt::default'
 include_recipe 'nodejs::default'
 
-# nodejs_npm 'fences-cli' do
-#  version node[:osmpolygons][:setup][:fences_cli][:version]
-# end
-
 %w(
   git
   zlib1g-dev
