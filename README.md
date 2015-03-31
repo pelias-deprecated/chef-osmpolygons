@@ -54,6 +54,8 @@ In either case, the bbox will be validated for the following conditions:
 
 Failure of any condition will abort the run.
 
+See the [code](https://github.com/pelias/chef-osmpolygons/blob/master/recipes/_extracts_slices.rb) for details.
+
 Supported Platforms
 -------------------
 Tested and supported on the following platforms:
