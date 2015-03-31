@@ -9,7 +9,7 @@ Downloads the planet pbf, installs dependencies and extracts admin boundaries fr
 What hardware do I need?
 ------------------------
 * ~150GB of free disk space
-* ~6GB of free RAM
+* ~12GB of free RAM
 
 How Long Does it Take
 ---------------------
