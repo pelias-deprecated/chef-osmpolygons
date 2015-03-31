@@ -7,7 +7,6 @@
 #   run as root.
 user_account node[:osmpolygons][:user][:id] do
   uid           node[:osmpolygons][:user][:uid]
-  gid           node[:osmpolygons][:user][:gid]
   home          node[:osmpolygons][:user][:home]
   shell         node[:osmpolygons][:user][:shell]
   manage_home   node[:osmpolygons][:user][:manage_home]

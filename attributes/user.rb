@@ -5,7 +5,6 @@
 
 default[:osmpolygons][:user][:id]           = 'poly'
 default[:osmpolygons][:user][:uid]          = 2002
-default[:osmpolygons][:user][:gid]          = 2002
 default[:osmpolygons][:user][:home]         = '/home/poly'
 default[:osmpolygons][:user][:shell]        = '/bin/bash'
 default[:osmpolygons][:user][:ssh_keygen]   = false
