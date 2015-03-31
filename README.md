@@ -4,7 +4,7 @@ osmpolygons
 
 What does it do?
 ----------------
-Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data. Optionally,you can slice up the resulting data into smaller extracts defined by bounding boxes.
+Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data. Optionally, you can slice up the resulting data into smaller extracts defined by bounding boxes.
 
 What hardware do I need?
 ------------------------
