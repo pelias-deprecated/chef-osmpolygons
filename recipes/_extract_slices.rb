@@ -57,11 +57,13 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
       name: sanitized_name,
       bbox: bbox
     )
+    only_if { slice_action == true }
   end
 
   directory "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}" do
-    user  node[:osmpolygons][:user][:id]
-    mode  0755
+    user    node[:osmpolygons][:user][:id]
+    mode    0755
+    only_if { slice_action == true }
   end
 
   execute "slice regions for #{sanitized_name}" do
