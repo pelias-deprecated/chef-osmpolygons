@@ -2,6 +2,9 @@
 # Cookbook Name:: osmpolygons
 # Recipe:: _extract_slices
 #
+# Region slices will only be created if node[:osmpolygons][:extract][:force][:slice] = true
+#   This attribute defaults to false, so you'll need to override it appropriately.
+#
 
 require 'json'
 
@@ -15,39 +18,9 @@ if node[:osmpolygons][:extract][:slices][:hash].empty? && File.exist?(node[:osmp
   node.set[:osmpolygons][:extract][:slices][:hash] = data
 end
 
-# build extracts after doing some validation of the data. These would
-#   fail when anyway when it came time to process them, but it seems like
-#   a nice addition to be able to pinpoint where the failure would occur
-#   ahead of time.
+# build extract templates and output directories
 node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
   sanitized_name = sanitize(name)
-
-  # is the bbox an array?
-  if bbox.is_a? Array
-    log "passed: bbox for #{sanitized_name} is type array"
-    # if so, does it have 4 elements?
-    if bbox.count == 4
-      # if so, is it a valid bounding box?
-      log "passed: bbox for #{sanitized_name} has four elements"
-
-      left    = bbox[0].to_f
-      bottom  = bbox[1].to_f
-      right   = bbox[2].to_f
-      top     = bbox[3].to_f
-
-      if left >= right
-        Chef::Application.fatal!("left coordinate (#{left}) is >= right coordinate (#{right}) for bbox #{sanitized_name}! Aborting...", 1)
-      elsif bottom >= top
-        Chef::Application.fatal!("bottom coordinate (#{bottom}) is >= top coordinate (#{top}) for bbox #{sanitized_name}! Aborting...", 1)
-      else
-        log "passed: bbox for #{sanitized_name} is valid"
-      end
-    else
-      Chef::Application.fatal!("bbox for #{sanitized_name} does not have four elements! Aborting...", 1)
-    end
-  else
-    Chef::Application.fatal!("bbox for #{sanitized_name} is not an array! Aborting...", 1)
-  end
 
   template "#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json" do
     user   node[:osmpolygons][:user][:id]
@@ -72,6 +45,7 @@ template "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
   mode    0755
 end
 
+# slice
 execute 'slice regions' do
   user    node[:osmpolygons][:user][:id]
   cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
