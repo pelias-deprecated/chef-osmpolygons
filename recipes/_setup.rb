@@ -8,9 +8,9 @@ include_recipe 'nodejs::default'
 
 %w(
   git
+  parallel
   osmctools
   build-essential
-  parallel
 ).each do |p|
   package p
 end
