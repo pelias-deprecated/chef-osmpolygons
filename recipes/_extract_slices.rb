@@ -19,7 +19,6 @@ end
 #   fail when anyway when it came time to process them, but it seems like
 #   a nice addition to be able to pinpoint where the failure would occur
 #   ahead of time.
-node[:osmpolygons][:extract][:force][:slice] ? slice_action = :run : slice_action = :nothing
 node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
   sanitized_name = sanitize(name)
 
@@ -57,25 +56,28 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
       name: sanitized_name,
       bbox: bbox
     )
-    only_if { slice_action == true }
+    only_if { node[:osmpolygons][:extract][:force][:slice] == true }
   end
 
   directory "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}" do
     user    node[:osmpolygons][:user][:id]
     mode    0755
-    only_if { slice_action == true }
+    only_if { node[:osmpolygons][:extract][:force][:slice] == true }
   end
+end
 
-  execute "slice regions for #{sanitized_name}" do
-    action      slice_action
-    user        node[:osmpolygons][:user][:id]
-    cwd         "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
-    timeout     node[:osmpolygons][:extract][:slices][:timeout]
-    command <<-EOH
-      ./bin/fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json \
-        #{node[:osmpolygons][:setup][:outputdir][:planet]} \
-        #{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}/ >\
-        #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1
-    EOH
-  end
+template "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
+  user    node[:osmpolygons][:user][:id]
+  source  'slice.sh.erb'
+  mode    0755
+end
+
+execute 'slice regions' do
+  user    node[:osmpolygons][:user][:id]
+  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
+  timeout node[:osmpolygons][:extract][:slices][:timeout]
+  command <<-EOH
+    parallel -j #{node[:osmpolygons][:extract][:slices][:jobs]} -a #{node[:osmpolygons][:setup][:bindir]}/slice.sh -d ';' --joblog #{node[:osmpolygons][:setup][:logdir]}/parallel_slice.log
+  EOH
+  only_if { node[:osmpolygons][:extract][:force][:slice] == true }
 end

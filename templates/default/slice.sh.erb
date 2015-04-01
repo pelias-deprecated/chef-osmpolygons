@@ -1,0 +1,13 @@
+<% require 'json' %>
+<% def sanitize(input) %>
+  <% input.gsub(/[^0-9A-z.\-]/, '_') %>
+<% end %>
+<% data = node[:osmpolygons][:extract][:slices][:hash] %>
+<% data.map do |name, bbox| %>
+  <% sanitized_name = sanitize(name) %>
+
+  ./bin/fences slice <%= node[:osmpolygons][:setup][:cfgdir] %>/<%= sanitized_name %>_config.json \
+    <%= node[:osmpolygons][:setup][:outputdir][:planet] %> \
+    <%= node[:osmpolygons][:setup][:outputdir][:slices] %>/<%= sanitized_name %>/ >\
+    <%= node[:osmpolygons][:setup][:logdir] %>/slice_<%= sanitized_name %>.log 2>&1;
+<% end %>

@@ -75,10 +75,16 @@ Vagrant.configure('2') do |config|
           'url' => 'http://download.geofabrik.de/europe/cyprus-latest.osm.pbf'
         },
         'extract' => {
+          'slices' => {
+            'hash' => {
+              'cyprusy1' => ['33.1696', '34.6323', '33.5635', '35.495'],
+              'cyprusy2' => ['33.1696', '34.9053', '34.1238', '35.0893']
+            }
+          },
           'force' => {
             'prep' => true,
             'build' => true,
-            'slices' => false
+            'slice' => true
           }
         }
       }

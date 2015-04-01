@@ -6,6 +6,8 @@ What does it do?
 ----------------
 Downloads the planet pbf, installs dependencies and extracts admin boundaries from the data. Optionally, you can slice up the resulting data into smaller extracts defined by bounding boxes.
 
+Alternatively, you can choose to specify an alternate pbf (i.e. an extract for example) rather than use the entire planet.
+
 What hardware do I need?
 ------------------------
 * ~125GB of free disk space
@@ -54,6 +56,8 @@ In either case, the bbox will be validated for the following conditions:
 - do the elements produce a valid bounding box?
 
 Failure of any condition will abort the run.
+
+Extraction of slices is done in parallel, with the number of parallel jobs defaulting to the total number of CPU cores on the system. This can be overridden in attributes.
 
 See the [code](https://github.com/pelias/chef-osmpolygons/blob/master/recipes/_extract_slices.rb) for details.
 

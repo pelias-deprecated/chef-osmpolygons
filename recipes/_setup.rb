@@ -8,8 +8,9 @@ include_recipe 'nodejs::default'
 
 %w(
   git
-  zlib1g-dev
+  osmctools
   build-essential
+  parallel
 ).each do |p|
   package p
 end
@@ -18,6 +19,7 @@ end
   node[:osmpolygons][:setup][:basedir],
   node[:osmpolygons][:setup][:logdir],
   node[:osmpolygons][:setup][:cfgdir],
+  node[:osmpolygons][:setup][:bindir],
   node[:osmpolygons][:setup][:datadir],
   node[:osmpolygons][:setup][:tempdir],
   node[:osmpolygons][:setup][:base_outputdir],
