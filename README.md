@@ -50,13 +50,6 @@ The file should contain json in the format below:
     }
 ```
 
-In either case, the bbox will be validated for the following conditions:
-- is it an array?
-- does it contain four elements?
-- do the elements produce a valid bounding box?
-
-Failure of any condition will abort the run.
-
 Extraction of slices is done in parallel, with the number of parallel jobs defaulting to the total number of CPU cores on the system. This can be overridden in attributes.
 
 See the [code](https://github.com/pelias/chef-osmpolygons/blob/master/recipes/_extract_slices.rb) for details.
