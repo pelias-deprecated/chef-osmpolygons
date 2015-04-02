@@ -51,7 +51,9 @@ execute 'slice regions' do
   cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extract][:slices][:timeout]
   command <<-EOH
-    parallel -j #{node[:osmpolygons][:extract][:slices][:jobs]} -a #{node[:osmpolygons][:setup][:bindir]}/slice.sh -d ';' --joblog #{node[:osmpolygons][:setup][:logdir]}/parallel_slice.log
+    parallel -j #{node[:osmpolygons][:extract][:slices][:jobs]} \
+    -a #{node[:osmpolygons][:setup][:bindir]}/slice.sh \
+    -d ';' --joblog #{node[:osmpolygons][:setup][:logdir]}/parallel_slice.log
   EOH
   only_if { node[:osmpolygons][:extract][:force][:slice] == true }
 end
