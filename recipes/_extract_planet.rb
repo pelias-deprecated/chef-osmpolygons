@@ -12,10 +12,9 @@ node[:osmpolygons][:extract][:force][:prep] ? prep_action = :run : prep_action =
 execute 'prep planet' do
   action  prep_action
   user    node[:osmpolygons][:user][:id]
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extract][:prep][:timeout]
   command <<-EOH
-    ./bin/fences prep -t \
+    fences prep -t \
       #{node[:osmpolygons][:setup][:tempdir]} \
       #{node[:osmpolygons][:setup][:datadir]}/#{filename} \
       #{node[:osmpolygons][:setup][:datadir]}/planet-filtered.pbf >\
@@ -28,10 +27,9 @@ node[:osmpolygons][:extract][:force][:build] ? build_action = :run : build_actio
 execute 'build planet' do
   action  build_action
   user    node[:osmpolygons][:user][:id]
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extract][:build][:timeout]
   command <<-EOH
-    ./bin/fences build #{node[:osmpolygons][:setup][:datadir]}/planet-filtered.pbf \
+    fences build #{node[:osmpolygons][:setup][:datadir]}/planet-filtered.pbf \
       #{node[:osmpolygons][:setup][:outputdir][:planet]} >\
       #{node[:osmpolygons][:setup][:logdir]}/build.log 2>&1
   EOH

@@ -31,12 +31,6 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
     )
     only_if { node[:osmpolygons][:extract][:force][:slice] == true }
   end
-
-  directory "#{node[:osmpolygons][:setup][:outputdir][:slices]}/#{sanitized_name}" do
-    user    node[:osmpolygons][:user][:id]
-    mode    0755
-    only_if { node[:osmpolygons][:extract][:force][:slice] == true }
-  end
 end
 
 template "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
@@ -48,7 +42,6 @@ end
 # slice
 execute 'slice regions' do
   user    node[:osmpolygons][:user][:id]
-  cwd     "#{node[:osmpolygons][:setup][:basedir]}/fences-cli/current"
   timeout node[:osmpolygons][:extract][:slices][:timeout]
   command <<-EOH
     parallel -j #{node[:osmpolygons][:extract][:slices][:jobs]} \

@@ -33,4 +33,6 @@ end
   end
 end
 
-include_recipe 'osmpolygons::_deploy'
+nodejs_npm 'fences' do
+  version node[:osmpolygons][:setup][:fences][:version]
+end
