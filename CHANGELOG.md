@@ -1,6 +1,11 @@
 osmpolygons changelog
 =====================
 
+0.3.0
+-----
+* install from npm
+* account for changes to cli binary
+
 0.2.0
 -----
 * cut admin boundaries from the planet rather than from extracts, which proved problematic
