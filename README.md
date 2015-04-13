@@ -17,6 +17,7 @@ How Long Does it Take
 ---------------------
 * ~4-8 hours
   * this is largely dependent on the both disk speed for the initial conversion process, and on single cpu core speed for the build process
+  * extracting one or more extracts will take a measure of additional time
 
 Contributing
 ------------
