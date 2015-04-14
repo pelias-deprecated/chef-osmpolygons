@@ -33,8 +33,18 @@ and process admin boundary data. See the default [attributes](https://github.com
 If you would additionally like to extract smaller regions from the resultant data, you can do so in one of two ways. The first is to directly specify the hash as an attribute value, as shown below. Name is translated into a directory (the input will be sanitized if you use spaces, etc). The bbox parameter is an array containing the coordinates of the bbox you want to process:
 
     default[:osmpolygons][:extract][:slices][:hash] = {
-      "usa" => ["left", "bottom", "right", "top"],
-      "australia" => ["left", "bottom", "right", "top"]
+      "usa" => {
+        "left" => "xxx",
+        "bottom" => "xxx",
+        "right" => "xxx",
+        "top" => "xxx"
+      },
+      "australia" => {
+        "left" => "xxx",
+        "bottom" => "xxx",
+        "right" => "xxx",
+        "top" => "xxx"
+      }
     }
 
 The second method is to create a file and specify the path to it. This file should be managed directly via a process outside of this cookbook (i.e. in a wrapper cookbook):
@@ -45,9 +55,18 @@ The file should contain json in the format below:
 
 ```json
     {
-      "usa": ["left", "bottom", "right", "top"],
-      "australia": ["left", "bottom", "right", "top"],
-      "ad_infinitum": ["left", "bottom", "right", "top"]
+      "usa": {
+        "left": "xxx",
+        "bottom": "xxx",
+        "right": "xxx",
+        "top": "xxx"
+      },
+      "australia": {
+        "left": "xxx",
+        "bottom": "xxx",
+        "right": "xxx",
+        "top": "xxx"
+      }
     }
 ```
 

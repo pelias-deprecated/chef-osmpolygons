@@ -26,8 +26,11 @@ node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
     user   node[:osmpolygons][:user][:id]
     source 'slice_config.json.erb'
     variables(
-      name: sanitized_name,
-      bbox: bbox
+      name:   sanitized_name,
+      left:   bbox[:left],
+      bottom: bbox[:bottom],
+      right:  bbox[:right],
+      top:    bbox[:top]
     )
     only_if { node[:osmpolygons][:extract][:force][:slice] == true }
   end
