@@ -17,7 +17,7 @@ default[:osmpolygons][:extract][:build][:timeout]   = 21_600  # 6 hours
 # see README
 default[:osmpolygons][:extract][:slices][:hash]     = {}
 default[:osmpolygons][:extract][:slices][:file]     = '/etc/osmpoly_slices.json'
-default[:osmpolygons][:extract][:slices][:jobs]     = node[:cpu][:total]
+default[:osmpolygons][:extract][:slices][:jobs]     = node[:cpu][:total] / 2
 default[:osmpolygons][:extract][:slices][:timeout]  = 7_200 # 2 hours per slice
 
 # planet
