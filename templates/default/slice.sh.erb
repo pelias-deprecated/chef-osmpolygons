@@ -1,12 +1,11 @@
-<% require 'json' %>
-<% def sanitize(input) %>
-  <% input.gsub(/[^0-9A-z.\-]/, '_') %>
-<% end %>
-<% data = node[:osmpolygons][:extract][:slices][:hash] %>
-<% data.map do |name, bbox| %>
-  <% sanitized_name = sanitize(name) %>
-
-  fences slice <%= node[:osmpolygons][:setup][:cfgdir] %>/<%= sanitized_name %>_config.json \
+<% require 'json' -%>
+<% def sanitize(input) -%>
+  <% input.gsub(/[^0-9A-z.\-]/, '_').downcase -%>
+<% end -%>
+<% data = JSON.parse(File.read(node[:osmpolygons][:extract][:slices][:file])) -%>
+<% data['features'].each do |feature| -%>
+  <% sanitized_name = sanitize(feature['properties']['name:en']) -%>
+  fences slice <%= node[:osmpolygons][:setup][:cfgdir] %>/<%= sanitized_name %>.geojson \
     <%= node[:osmpolygons][:setup][:outputdir][:planet] %> \
     <%= node[:osmpolygons][:setup][:outputdir][:slices] %> >\
     <%= node[:osmpolygons][:setup][:logdir] %>/slice_<%= sanitized_name %>.log 2>&1;

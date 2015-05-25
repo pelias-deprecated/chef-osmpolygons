@@ -9,30 +9,26 @@
 require 'json'
 
 def sanitize(input)
-  input.gsub(/[^0-9A-z.\-]/, '_')
+  input.gsub(/[^0-9A-z.\-]/, '_').downcase
 end
 
-# if attribute hash is empty and the json override file exists, read it and use that data
-if node[:osmpolygons][:extract][:slices][:hash].empty? && File.exist?(node[:osmpolygons][:extract][:slices][:file])
+# file exists?
+if File.exist?(node[:osmpolygons][:extract][:slices][:file])
   data = JSON.parse(File.read(node[:osmpolygons][:extract][:slices][:file]))
-  node.set[:osmpolygons][:extract][:slices][:hash] = data
+else
+  Chef::Application.fatal!("#{node[:osmpolygons][:extract][:slices][:file]} does not exist. Aborting!", 1)
 end
 
 # build extract templates and output directories
-node[:osmpolygons][:extract][:slices][:hash].map do |name, bbox|
-  sanitized_name = sanitize(name)
+data['features'].each do |feature|
+  feature_json    = feature.to_json
+  sanitized_name  = sanitize(feature['properties']['name:en'])
 
-  template "#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}_config.json" do
-    user   node[:osmpolygons][:user][:id]
-    source 'slice_config.json.erb'
-    variables(
-      name:   sanitized_name,
-      left:   bbox[:left],
-      bottom: bbox[:bottom],
-      right:  bbox[:right],
-      top:    bbox[:top]
-    )
-    only_if { node[:osmpolygons][:extract][:force][:slice] == true }
+  template "#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson" do
+    user    node[:osmpolygons][:user][:id]
+    source  'extracts.geojson.erb'
+    mode    0755
+    variables(geojson: feature_json)
   end
 end
 

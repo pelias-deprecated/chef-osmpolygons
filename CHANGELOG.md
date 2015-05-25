@@ -1,6 +1,11 @@
 osmpolygons changelog
 =====================
 
+0.4.0
+-----
+* supports update to fences which parses geojson files
+  * splits the file into uniques to allow parallel processing of multiple jobs
+
 0.3.0
 -----
 * install from npm
