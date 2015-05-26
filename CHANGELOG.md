@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.4.1
+-----
+* move all logic for building configs into a ruby block
+
 0.4.0
 -----
 * supports update to fences which parses geojson files
