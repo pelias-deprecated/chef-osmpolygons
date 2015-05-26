@@ -8,34 +8,62 @@
 
 require 'json'
 
-def sanitize(input)
-  input.gsub(/[^0-9A-z.\-]/, '_').downcase
-end
-
-# file exists?
-if File.exist?(node[:osmpolygons][:extract][:slices][:file])
-  data = JSON.parse(File.read(node[:osmpolygons][:extract][:slices][:file]))
-else
-  Chef::Application.fatal!("#{node[:osmpolygons][:extract][:slices][:file]} does not exist. Aborting!", 1)
-end
-
-# build extract templates and output directories
-data['features'].each do |feature|
-  feature_json    = feature.to_json
-  sanitized_name  = sanitize(feature['properties']['name:en'])
-
-  template "#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson" do
-    user    node[:osmpolygons][:user][:id]
-    source  'extracts.geojson.erb'
-    mode    0755
-    variables(geojson: feature_json)
-  end
-end
-
-template "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
+# create geojson from admin2
+execute 'create region geojson' do
   user    node[:osmpolygons][:user][:id]
-  source  'slice.sh.erb'
-  mode    0755
+  timeout node[:osmpolygons][:extract][:slices][:timeout]
+  command <<-EOH
+    fences regions \
+      #{node[:osmpolygons][:setup][:outputdir][:planet]}/admin_level_2.geojson \
+      #{node[:osmpolygons][:setup][:outputdir][:planet]}/regions.geojson
+  EOH
+  only_if { node[:osmpolygons][:extract][:force][:slice] == true }
+end
+
+# because the configuration of the geojson and the slice script are both driven off the existence
+#   of a file that doesn't exist at the beginning of the chef run (or which is out of date when chef
+#   goes to evaluate it), we'll create all the configs as part of a ruby block.
+#
+ruby_block 'build region configs' do
+  block do
+    require 'json'
+
+    def sanitize(input)
+      input.gsub(/[^0-9A-z.\-]/, '_').downcase
+    end
+
+    slice_script = "#{node[:osmpolygons][:setup][:bindir]}/slice.sh"
+
+    # clean out the old script
+    File.truncate(slice_script, 0) if File.exist?(slice_script)
+
+    data = JSON.parse(File.read("#{node[:osmpolygons][:setup][:outputdir][:planet]}/regions.geojson"))
+    data['features'].each do |feature|
+      feature_json    = feature.to_json
+      sanitized_name  = sanitize(feature['properties']['name'])
+
+      File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson", 'w') do |file|
+        file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
+      end
+
+      File.open("#{node[:osmpolygons][:setup][:bindir]}/slice.sh", 'a', 0755) do |file|
+        file.write("
+          fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
+            #{node[:osmpolygons][:setup][:outputdir][:planet]} \
+            #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
+            #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
+        ")
+      end
+    end
+  end
+
+  only_if { node[:osmpolygons][:extract][:force][:slice] == true }
+end
+
+# fakeout chef - this needs to exist when chef evaluates the recipes, but we don't actually
+#   populate it untle the ruby_block above runs
+#
+file "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
 end
 
 # slice

@@ -15,8 +15,6 @@ default[:osmpolygons][:extract][:prep][:timeout]    = 7_200   # 2 hours
 default[:osmpolygons][:extract][:build][:timeout]   = 21_600  # 6 hours
 
 # see README
-default[:osmpolygons][:extract][:slices][:file]     = '/etc/osmpoly_slices.geojson'
-# default[:osmpolygons][:extract][:slices][:file]    = "#{node[:osmpolygons][:setup][:base_outputdir]}/some_file" TODO: when the file used is produced by the initial planet extraction
 default[:osmpolygons][:extract][:slices][:jobs]     = node[:cpu][:total] < 2 ? 1 : (node[:cpu][:total] * 0.5).floor
 default[:osmpolygons][:extract][:slices][:timeout]  = 604_800 # 1 week
 
