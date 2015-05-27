@@ -72,25 +72,9 @@ Vagrant.configure('2') do |config|
     chef.json = {
       'osmpolygons' => {
         'planet' => {
-          'url' => 'http://download.geofabrik.de/europe/cyprus-latest.osm.pbf'
+          'url' => 'http://download.geofabrik.de/europe/italy-latest.osm.pbf'
         },
         'extract' => {
-          'slices' => {
-            'hash' => {
-              'cyprusy1' => {
-                'left' => '33.1696',
-                'bottom' => '34.6323',
-                'right' => '33.5635',
-                'top' => '35.495'
-              },
-              'cyprusy2' => {
-                'left' => '33.1696',
-                'bottom' => '34.9053',
-                'right' => '33.1238',
-                'top' => '35.0893'
-              }
-            }
-          },
           'force' => {
             'prep' => true,
             'build' => true,
