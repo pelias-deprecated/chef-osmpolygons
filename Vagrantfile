@@ -11,6 +11,12 @@ Vagrant.configure('2') do |config|
   config.vm.box     = 'ubuntu-14.04'
   config.vm.box_url = 'https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box'
 
+  config.vm.provider 'virtualbox' do |v|
+    v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    v.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+  end
+
+
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
@@ -76,8 +82,8 @@ Vagrant.configure('2') do |config|
         },
         'extract' => {
           'force' => {
-            'prep' => true,
-            'build' => true,
+            'prep' => false,
+            'build' => false,
             'slice' => true
           }
         }
