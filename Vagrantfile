@@ -16,7 +16,6 @@ Vagrant.configure('2') do |config|
     v.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
   end
 
-
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
