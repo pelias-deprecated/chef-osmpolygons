@@ -60,12 +60,6 @@ ruby_block 'build region configs' do
   only_if { node[:osmpolygons][:extract][:force][:slice] == true }
 end
 
-# fakeout chef - this needs to exist when chef evaluates the recipes, but we don't actually
-#   populate it untle the ruby_block above runs
-#
-file "#{node[:osmpolygons][:setup][:bindir]}/slice.sh" do
-end
-
 # slice
 execute 'slice regions' do
   user    node[:osmpolygons][:user][:id]
