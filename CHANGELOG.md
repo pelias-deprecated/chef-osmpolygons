@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.4.2
+-----
+* process russia/france, etc. first, as they're incredibly slow
+
 0.4.1
 -----
 * move all logic for building configs into a ruby block

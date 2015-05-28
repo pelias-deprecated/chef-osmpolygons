@@ -46,13 +46,35 @@ ruby_block 'build region configs' do
         file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
       end
 
-      File.open("#{node[:osmpolygons][:setup][:bindir]}/slice.sh", 'a', 0755) do |file|
-        file.write("
-          fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
-            #{node[:osmpolygons][:setup][:outputdir][:planet]} \
-            #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
-            #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
-        ")
+      # these are our longest running extracts: move them to the top of the file so
+      #   they process from the beginning of the run.
+      #
+      if sanitized_name =~ /^russia|^brazil|^germany|^france|^italy|^czech/
+        new_file = "#{node[:osmpolygons][:setup][:bindir]}/.slice.sh"
+        File.open(new_file, 'w', 0755) do |file|
+          file.write("
+            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
+              #{node[:osmpolygons][:setup][:outputdir][:planet]} \
+              #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
+              #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
+          ")
+          if File.exist?(slice_script)
+            File.foreach(slice_script) do |line|
+              file.puts line
+            end
+          end
+
+          File.rename(new_file, slice_script)
+        end
+      else
+        File.open(slice_script, 'a', 0755) do |file|
+          file.write("
+            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
+              #{node[:osmpolygons][:setup][:outputdir][:planet]} \
+              #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
+              #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
+          ")
+        end
       end
     end
   end
