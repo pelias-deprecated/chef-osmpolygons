@@ -24,6 +24,8 @@ end
 #
 ruby_block 'build region configs' do
   block do
+    require 'json'
+
     slice_script = "#{node[:osmpolygons][:setup][:bindir]}/slice.sh"
 
     # clean out the old script
