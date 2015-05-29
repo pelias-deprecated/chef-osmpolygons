@@ -6,8 +6,6 @@
 #   This attribute defaults to false, so you'll need to override it appropriately.
 #
 
-require 'json'
-
 # create geojson from admin2
 execute 'create region geojson' do
   user    node[:osmpolygons][:user][:id]
@@ -26,12 +24,6 @@ end
 #
 ruby_block 'build region configs' do
   block do
-    require 'json'
-
-    def sanitize(input)
-      input.gsub(/[^0-9A-z.\-]/, '_').downcase
-    end
-
     slice_script = "#{node[:osmpolygons][:setup][:bindir]}/slice.sh"
 
     # clean out the old script
@@ -39,24 +31,24 @@ ruby_block 'build region configs' do
 
     data = JSON.parse(File.read("#{node[:osmpolygons][:setup][:outputdir][:planet]}/regions.geojson"))
     data['features'].each do |feature|
-      feature_json    = feature.to_json
-      sanitized_name  = sanitize(feature['properties']['name'])
+      name          = feature['properties']['name']
+      feature_json  = feature.to_json
 
-      File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson", 'w') do |file|
+      File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson", 'w') do |file|
         file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
       end
 
       # these are our longest running extracts: move them to the top of the file so
       #   they process from the beginning of the run.
       #
-      if sanitized_name =~ /^russia|^brazil|^germany|^france|^italy|^czech/
+      if name =~ /^russia|^brazil|^germany|^france|^italy|^czech/
         new_file = "#{node[:osmpolygons][:setup][:bindir]}/.slice.sh"
         File.open(new_file, 'w', 0755) do |file|
           file.write("
-            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
+            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson \
               #{node[:osmpolygons][:setup][:outputdir][:planet]} \
               #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
-              #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
+              #{node[:osmpolygons][:setup][:logdir]}/slice_#{name}.log 2>&1;
           ")
           if File.exist?(slice_script)
             File.foreach(slice_script) do |line|
@@ -69,10 +61,10 @@ ruby_block 'build region configs' do
       else
         File.open(slice_script, 'a', 0755) do |file|
           file.write("
-            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{sanitized_name}.geojson \
+            fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson \
               #{node[:osmpolygons][:setup][:outputdir][:planet]} \
               #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
-              #{node[:osmpolygons][:setup][:logdir]}/slice_#{sanitized_name}.log 2>&1;
+              #{node[:osmpolygons][:setup][:logdir]}/slice_#{name}.log 2>&1;
           ")
         end
       end
