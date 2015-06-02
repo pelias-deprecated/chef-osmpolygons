@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.4.3
+-----
+* allow skipping of countries matching a regex
+
 0.4.2
 -----
 * process russia/france, etc. first, as they're incredibly slow
