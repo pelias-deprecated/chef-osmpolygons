@@ -37,21 +37,23 @@ ruby_block 'build region configs' do
       feature_json  = feature.to_json
 
       # allow exclusion of certain countries via an attribute array
-      name_grep = name.split('-').last
-      include_exclude = node[:osmpolygons][:extract][:slices][:exclude_array].grep(/#{name_grep}/i)
-      next unless include_exclude.empty?
+      node[:osmpolygons][:extract][:slices][:exclude_array].each do |c|
+        if /#{c}/ =~ name
+          next
+        else
+          File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson", 'w') do |file|
+            file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
+          end
 
-      File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson", 'w') do |file|
-        file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
-      end
-
-      File.open(slice_script, 'a', 0755) do |file|
-        file.write("
-          fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson \
-            #{node[:osmpolygons][:setup][:outputdir][:planet]} \
-            #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
-            #{node[:osmpolygons][:setup][:logdir]}/slice_#{name}.log 2>&1;
-        ")
+          File.open(slice_script, 'a', 0755) do |file|
+            file.write("
+              fences slice #{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson \
+                #{node[:osmpolygons][:setup][:outputdir][:planet]} \
+                #{node[:osmpolygons][:setup][:outputdir][:slices]} >\
+                #{node[:osmpolygons][:setup][:logdir]}/slice_#{name}.log 2>&1;
+            ")
+          end
+        end
       end
     end
   end
