@@ -36,9 +36,8 @@ ruby_block 'build region configs' do
       name          = feature['properties']['name']
       feature_json  = feature.to_json
 
-      name_grep = name.split('-').last
-      include_exclude = node[:osmpolygons][:extract][:slices][:exclude_array].grep(/#{name_grep}/i)
-      next unless include_exclude.empty?
+      # skip countries, exact match only
+      next if node[:osmpolygons][:extract][:slices][:exclude_array].include? name
 
       File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson", 'w') do |file|
         file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
