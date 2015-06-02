@@ -38,7 +38,7 @@ ruby_block 'build region configs' do
 
       # allow exclusion of certain countries via an attribute array
       include_exclude = node[:osmpolygons][:extract][:slices][:exclude_array].grep(/#{name}/i)
-      next if include_exclude.empty?
+      next unless include_exclude.empty?
 
       File.open("#{node[:osmpolygons][:setup][:cfgdir]}/#{name}.geojson", 'w') do |file|
         file.write("{\"type\":\"FeatureCollection\",\"features\":[#{feature_json}]}")
