@@ -15,7 +15,7 @@ default[:osmpolygons][:extract][:prep][:timeout]         = 7_200   # 2 hours
 default[:osmpolygons][:extract][:build][:timeout]        = 21_600  # 6 hours
 
 # see README
-default[:osmpolygons][:extract][:slices][:jobs]          = node[:cpu][:total] < 2 ? 1 : (node[:cpu][:total] * 0.5).floor
+default[:osmpolygons][:extract][:slices][:jobs]          = node[:cpu][:total] < 2 ? 1 : (node[:cpu][:total] * 0.4).floor
 default[:osmpolygons][:extract][:slices][:timeout]       = 604_800 # 1 week
 default[:osmpolygons][:extract][:slices][:exclude_array] = %w()
 
