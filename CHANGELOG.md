@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.4.4
+-----
+* increase default timeouts
+
 0.4.3
 -----
 * allow skipping of countries matching a regex
