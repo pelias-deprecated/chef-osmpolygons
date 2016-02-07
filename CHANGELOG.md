@@ -1,6 +1,10 @@
 osmpolygons changelog
 =====================
 
+0.5.0
+-----
+* update nodejs cookbooks and attributes
+
 0.4.4
 -----
 * increase default timeouts
