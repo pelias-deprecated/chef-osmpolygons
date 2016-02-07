@@ -8,13 +8,9 @@ version          '0.4.4'
 
 recipe 'osmpolygons', 'Builds metro extracts'
 
-%w(
-  apt
-  user
-  nodejs
-).each do |dep|
-  depends dep
-end
+depends 'apt'
+depends 'user'
+depends 'nodejs', '~> 2.4.0'
 
 %w(ubuntu).each do |os|
   supports os
